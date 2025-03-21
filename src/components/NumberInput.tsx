@@ -11,27 +11,33 @@ export const NumberInput: React.FC<InputProps> = ({
 }) => {
   return (
     <div>
-      <label className={`block text-sm font-medium mb-2 ${
+      <label className={`block text-sm font-medium mb-3 transition-colors duration-300 ${
         darkMode ? 'text-gray-300' : 'text-gray-700'
       }`}>
         {label}
       </label>
-      <div className={`relative rounded-lg shadow-sm ${
-        darkMode ? 'shadow-gray-900/50' : 'shadow-indigo-100'
+      <div className={`relative rounded-xl transition-all duration-300 ${
+        darkMode 
+          ? 'shadow-lg shadow-gray-900/30' 
+          : 'shadow-lg shadow-indigo-100/50'
       }`}>
         {prefix && (
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{prefix}</span>
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+            <span className={`text-sm transition-colors duration-300 ${
+              darkMode ? 'text-gray-400' : 'text-gray-500'
+            }`}>{prefix}</span>
           </div>
         )}
         <input
           type="number"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`block w-full rounded-lg ${prefix ? 'pl-7' : 'px-4'} py-2.5 text-sm transition-colors duration-200 ${
+          className={`block w-full rounded-xl ${
+            prefix ? 'pl-8' : 'px-4'
+          } py-3.5 text-sm transition-all duration-300 outline-none ${
             darkMode 
-              ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20' 
-              : 'bg-white border border-indigo-100 text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20'
+              ? 'bg-gray-700/50 border-2 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500/50 focus:bg-gray-700' 
+              : 'bg-white/50 border-2 border-indigo-100 text-gray-900 placeholder-gray-400 focus:border-indigo-500/50 focus:bg-white'
           }`}
           placeholder={placeholder}
         />

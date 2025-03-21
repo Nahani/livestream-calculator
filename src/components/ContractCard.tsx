@@ -22,19 +22,23 @@ const PositionSizeDisplay: React.FC<PositionSizeDisplayProps> = ({
   maxLossAmount,
   darkMode
 }) => (
-  <div className={`p-3 rounded-lg shadow-sm transition-colors duration-200 ${
-    darkMode ? 'bg-gray-800' : 'bg-white'
+  <div className={`p-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${
+    darkMode 
+      ? 'bg-gray-800/50 shadow-lg shadow-gray-900/20' 
+      : 'bg-white shadow-lg shadow-indigo-100/30'
   }`}>
-    <p className={`text-sm mb-1 ${
+    <p className={`text-sm font-medium mb-2 transition-colors duration-300 ${
       darkMode ? 'text-gray-400' : 'text-gray-600'
     }`}>{label}</p>
     <div>
-      <p className={`text-xl font-bold ${
+      <p className={`text-2xl font-bold mb-1 transition-colors duration-300 ${
         darkMode ? 'text-gray-200' : 'text-gray-900'
       }`}>
         {contracts}
       </p>
-      <p className={`text-xs text-gray-500`}>
+      <p className={`text-sm transition-colors duration-300 ${
+        darkMode ? 'text-gray-500' : 'text-gray-500'
+      }`}>
         Perte max: ${maxLossAmount.toFixed(2)}
       </p>
     </div>
@@ -59,10 +63,12 @@ export const ContractCard: React.FC<ContractCardProps> = ({
   const microContracts = calculatePositionSize(contract.micro);
 
   return (
-    <div className={`rounded-lg p-4 transition-colors duration-200 ${
-      darkMode ? 'bg-gray-700' : 'bg-gray-50'
+    <div className={`rounded-2xl p-6 transition-all duration-300 ${
+      darkMode 
+        ? 'bg-gray-700/50 hover:bg-gray-700/70' 
+        : 'bg-gray-50/80 hover:bg-gray-50'
     }`}>
-      <h3 className={`text-lg font-semibold mb-3 ${
+      <h3 className={`text-xl font-semibold mb-4 transition-colors duration-300 ${
         darkMode ? 'text-gray-200' : 'text-gray-800'
       }`}>
         {contract.name} ({symbol})
