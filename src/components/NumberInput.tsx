@@ -30,8 +30,18 @@ export const NumberInput: React.FC<InputProps> = ({
         )}
         <input
           type="number"
+          min="0"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => {
+            const val = e.target.value;
+            if (val === '' || parseFloat(val) >= 0) {
+              onChange(val);
+            }
+          }}
+          onWheel={(e) => {
+            e.currentTarget.blur();
+            e.preventDefault();
+          }}
           className={`block w-full rounded-xl ${
             prefix ? 'pl-8' : 'px-4'
           } py-3.5 text-sm transition-all duration-300 outline-none ${
