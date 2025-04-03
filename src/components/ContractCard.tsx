@@ -52,23 +52,35 @@ export const ContractCard: React.FC<ContractCardProps> = ({
                     (additionalMicros * stopLossPoints * contract.micro);
 
   return (
-    <div className={`rounded-2xl p-6 transition-all duration-300 ${
-      darkMode 
-        ? 'bg-gray-700/50 hover:bg-gray-700/70' 
-        : 'bg-gray-50/80 hover:bg-gray-50'
-    }`}>
-      <h3 className={`text-xl font-semibold mb-6 transition-colors duration-300 ${
+    <div 
+      className={`rounded-2xl p-6 ${
+        darkMode 
+          ? 'bg-gray-700/50 hover:bg-gray-700/70' 
+          : 'bg-gray-100 hover:bg-gray-50'
+      }`}
+      style={{ 
+        transition: 'background-color 0.3s ease',
+        outline: 'none',
+        WebkitTapHighlightColor: 'transparent'
+      }}
+    >
+      <h3 className={`text-xl font-semibold mb-6 ${
         darkMode ? 'text-gray-200' : 'text-gray-800'
-      }`}>
+      }`}
+        style={{ transition: 'color 0.3s ease' }}
+      >
         {contract.name} ({symbol})
       </h3>
       
       {useMini && additionalMicros > 0 ? (
-        <div className={`overflow-hidden relative rounded-xl transition-all duration-300 ${
-          darkMode 
-            ? 'bg-gradient-to-r from-gray-800 to-gray-800/70 shadow-lg shadow-gray-900/20' 
-            : 'bg-gradient-to-r from-white to-gray-50 shadow-lg shadow-indigo-100/30'
-        }`}>
+        <div 
+          className={`overflow-hidden relative rounded-xl ${
+            darkMode 
+              ? 'bg-gray-800 shadow-lg shadow-gray-900/20' 
+              : 'bg-white shadow-lg shadow-indigo-100/70 border border-gray-200'
+          }`}
+          style={{ transition: 'background-color 0.3s ease, box-shadow 0.3s ease' }}
+        >
           <div className="flex items-center justify-between p-4">
             <div>
               <p className={`font-medium transition-colors duration-300 ${
@@ -122,11 +134,14 @@ export const ContractCard: React.FC<ContractCardProps> = ({
       ) : (
         <div>
           {useMini && (
-            <div className={`overflow-hidden relative rounded-xl transition-all duration-300 ${
-              darkMode 
-                ? 'bg-gradient-to-r from-gray-800 to-gray-800/70 shadow-lg shadow-gray-900/20' 
-                : 'bg-gradient-to-r from-white to-gray-50 shadow-lg shadow-indigo-100/30'
-            }`}>
+            <div 
+              className={`overflow-hidden relative rounded-xl ${
+                darkMode 
+                  ? 'bg-gray-800 shadow-lg shadow-gray-900/20' 
+                  : 'bg-white shadow-lg shadow-indigo-100/70 border border-gray-200'
+              }`}
+              style={{ transition: 'background-color 0.3s ease, box-shadow 0.3s ease' }}
+            >
               <div className="flex items-center justify-between p-4">
                 <div>
                   <p className={`font-medium transition-colors duration-300 ${
@@ -157,11 +172,14 @@ export const ContractCard: React.FC<ContractCardProps> = ({
           )}
           
           {!useMini && (
-            <div className={`overflow-hidden relative rounded-xl transition-all duration-300 ${
-              darkMode 
-                ? 'bg-gradient-to-r from-gray-800 to-gray-800/70 shadow-lg shadow-gray-900/20' 
-                : 'bg-gradient-to-r from-white to-gray-50 shadow-lg shadow-indigo-100/30'
-            }`}>
+            <div 
+              className={`overflow-hidden relative rounded-xl ${
+                darkMode 
+                  ? 'bg-gray-800 shadow-lg shadow-gray-900/20' 
+                  : 'bg-white shadow-lg shadow-indigo-100/70 border border-gray-200'
+              }`}
+              style={{ transition: 'background-color 0.3s ease, box-shadow 0.3s ease' }}
+            >
               <div className="flex items-center justify-between p-4">
                 <div>
                   <p className={`font-medium transition-colors duration-300 ${

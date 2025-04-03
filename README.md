@@ -3,9 +3,10 @@
 A modern, responsive calculator for trading position sizing based on drawdown, stop loss, and platform settings.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![React](https://img.shields.io/badge/React-18-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue.svg)](https://www.typescriptlang.org/)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-06B6D4.svg)](https://tailwindcss.com/)
+[![React](https://img.shields.io/badge/React-19.1-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-06B6D4.svg)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-6.2-646CFF.svg)](https://vitejs.dev/)
 
 ![Livestream Calculator Screenshot](/images/screenshot_dark.png)
 
@@ -16,8 +17,8 @@ The Livestream Calculator helps traders determine the optimal position size for 
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="/images/screenshot_dark.png" alt="Dark Mode" width="400"/></td>
-      <td align="center"><img src="/images/screenshot_light.png" alt="Light Mode" width="400"/></td>
+      <td align="center"><img src="images/screenshot_dark.png" alt="Dark Mode" width="400"/></td>
+      <td align="center"><img src="images/screenshot_light.png" alt="Light Mode" width="400"/></td>
     </tr>
     <tr>
       <td align="center"><b>Dark Mode</b></td>
@@ -75,13 +76,6 @@ This ensures traders can maximize their position size while staying within risk 
 The application automatically detects your browser's language settings and displays content in:
 - 🇬🇧 English (default)
 - 🇫🇷 French
-
-You can manually switch languages using the language toggle in the application header. Your language preference is saved and will be remembered the next time you visit.
-
-The language detection follows this order:
-1. Checks `navigator.language` (your primary browser language)
-2. Checks `navigator.languages` (your list of preferred languages)
-3. Defaults to English if no supported language is found
 
 ## 🔧 Technical Details
 
