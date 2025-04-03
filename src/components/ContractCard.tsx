@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContractInfo } from '../types';
+import { calculateMaxContracts, calculateAdditionalMicroContracts } from '../utils/calculatorUtils';
 
 interface ContractCardProps {
   symbol: string;
@@ -16,30 +17,32 @@ export const ContractCard: React.FC<ContractCardProps> = ({
   maxLoss,
   darkMode
 }) => {
-  // Calculate maximum position sizes
-  const calculateMaxContracts = (tickValue: number) => {
-    if (!stopLossPoints) return 0;
-    const lossPerContract = stopLossPoints * tickValue;
-    const maxContracts = Math.floor(maxLoss / lossPerContract);
-    return Math.max(0, maxContracts);
-  };
+  // Utilisation des fonctions utilitaires
+  const maxMiniContracts = calculateMaxContracts(
+    stopLossPoints,
+    contract.mini,
+    maxLoss
+  );
 
-  const maxMiniContracts = calculateMaxContracts(contract.mini);
-  const maxMicroContracts = calculateMaxContracts(contract.micro);
+  const maxMicroContracts = calculateMaxContracts(
+    stopLossPoints,
+    contract.micro,
+    maxLoss
+  );
   
-  // Calculate remaining loss after using mini contracts
-  const lossFromMinis = maxMiniContracts * stopLossPoints * contract.mini;
-  const remainingLoss = Math.max(0, maxLoss - lossFromMinis);
+  // Micro contrats additionnels à utiliser avec les mini contrats
+  const additionalMicros = calculateAdditionalMicroContracts(
+    maxLoss,
+    maxMiniContracts,
+    stopLossPoints,
+    contract.mini,
+    contract.micro
+  );
   
-  // Calculate additional micro contracts that can be used with remaining loss
-  const additionalMicros = remainingLoss > 0 
-    ? Math.floor(remainingLoss / (stopLossPoints * contract.micro)) 
-    : 0;
-  
-  // Determine if we should use mini contracts, micros, or both
+  // Déterminer s'il faut utiliser des mini contrats
   const useMini = maxMiniContracts > 0;
   
-  // Calculate total potential loss
+  // Calculer la perte totale potentielle
   const totalLoss = (maxMiniContracts * stopLossPoints * contract.mini) + 
                     (additionalMicros * stopLossPoints * contract.micro);
 

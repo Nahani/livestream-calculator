@@ -1,5 +1,6 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import type { Platform } from '../types';
+import { calculateMaxLoss } from '../utils/calculatorUtils';
 
 // Key for localStorage
 const PLATFORM_STORAGE_KEY = 'calculator_platform';
@@ -18,11 +19,11 @@ export const useCalculator = () => {
     localStorage.setItem(PLATFORM_STORAGE_KEY, platform);
   }, [platform]);
 
-  const calculateMaxLoss = useCallback((drawdownValue: number) => {
-    return platform === 'UFUNDED' ? drawdownValue / 15 : drawdownValue / 10;
-  }, [platform]);
-
-  const maxLoss = drawdown ? calculateMaxLoss(parseFloat(drawdown)) : 0;
+  // Utilisation de la fonction utilitaire pour le calcul
+  const maxLoss = drawdown 
+    ? calculateMaxLoss(parseFloat(drawdown), platform) 
+    : 0;
+    
   const stopLossPoints = stopLoss ? parseFloat(stopLoss) : 0;
 
   return {
