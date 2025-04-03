@@ -4,6 +4,8 @@ import { CONTRACTS } from './constants/contracts';
 import { NumberInput } from './components/NumberInput';
 import { ContractCard } from './components/ContractCard';
 import { useCalculator } from './hooks/useCalculator';
+import { Select } from './components/Select';
+import { Platform } from './types';
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(true);
@@ -12,9 +14,18 @@ function App() {
     setDrawdown,
     stopLoss,
     setStopLoss,
+    platform,
+    setPlatform,
     maxLoss,
     stopLossPoints
   } = useCalculator();
+
+  const platformOptions = [
+    { value: 'TopStep', label: 'TopStep' },
+    { value: 'FTMO', label: 'FTMO' },
+    { value: 'WGF', label: 'WGF' },
+    { value: 'UFUNDED', label: 'UFUNDED' }
+  ];
   
   return (
     <div className={`min-h-screen transition-all duration-500 ${
@@ -57,7 +68,7 @@ function App() {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 animate-fade-in">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 animate-fade-in">
             <NumberInput
               label="Drawdown Restant ($)"
               value={drawdown}
@@ -71,6 +82,13 @@ function App() {
               value={stopLoss}
               onChange={setStopLoss}
               placeholder="Entrez votre stop loss"
+              darkMode={darkMode}
+            />
+            <Select
+              label="Plateforme"
+              value={platform}
+              onChange={(value) => setPlatform(value as Platform)}
+              options={platformOptions}
               darkMode={darkMode}
             />
           </div>
@@ -91,6 +109,11 @@ function App() {
                   darkMode ? 'text-blue-400' : 'text-indigo-600'
                 }`}>
                   ${maxLoss.toFixed(2)}
+                </p>
+                <p className={`text-sm transition-colors duration-300 ${
+                  darkMode ? 'text-gray-400' : 'text-gray-600'
+                }`}>
+                  {platform === 'UFUNDED' ? 'Calculé avec 1/15 du drawdown' : 'Calculé avec 1/10 du drawdown'}
                 </p>
               </div>
 
