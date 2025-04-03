@@ -110,7 +110,7 @@ The application follows a modern React architecture with:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/livestream-calculator.git
+git clone https://github.com/nahani/livestream-calculator.git
 cd livestream-calculator
 
 # Install dependencies
@@ -131,7 +131,7 @@ Then open your browser to http://localhost:5173
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/nahani/livestream-calculator.git
 cd livestream-calculator
 
 # Install dependencies
