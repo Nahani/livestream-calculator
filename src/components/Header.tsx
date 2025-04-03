@@ -1,6 +1,7 @@
 import React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export const Header: React.FC = () => {
   const { darkMode, toggleDarkMode } = useTheme();
@@ -32,16 +33,19 @@ export const Header: React.FC = () => {
           LIVESTREAM CALCULATOR
         </h1>
       </div>
-      <button
-        onClick={toggleDarkMode}
-        className={`p-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${
-          darkMode 
-            ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' 
-            : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
-        }`}
-      >
-        {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-      </button>
+      <div className="flex items-center gap-2">
+        {/* <LanguageSwitcher /> */}
+        <button
+          onClick={toggleDarkMode}
+          className={`p-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${
+            darkMode 
+              ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' 
+              : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
+          }`}
+        >
+          {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+        </button>
+      </div>
     </div>
   );
 }; 

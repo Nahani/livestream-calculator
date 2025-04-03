@@ -1,10 +1,10 @@
 import { Platform } from '../types';
 
 /**
- * Calcule la perte maximale autorisée en fonction du drawdown et de la plateforme
- * @param drawdownValue Montant du drawdown
- * @param platform Plateforme sélectionnée
- * @returns Montant de la perte maximale autorisée
+ * Calculates the maximum allowed loss based on drawdown and selected platform
+ * @param drawdownValue Drawdown amount
+ * @param platform Selected platform
+ * @returns Maximum allowed loss amount
  */
 export const calculateMaxLoss = (drawdownValue: number, platform: Platform): number => {
   const divisor = platform === 'UFUNDED' ? 15 : 10;
@@ -12,11 +12,11 @@ export const calculateMaxLoss = (drawdownValue: number, platform: Platform): num
 };
 
 /**
- * Calcule le nombre maximum de contrats en fonction de la perte maximale autorisée et du stop loss
- * @param stopLossPoints Points de stop loss
- * @param tickValue Valeur d'un tick pour le contrat
- * @param maxLoss Perte maximale autorisée
- * @returns Nombre maximum de contrats
+ * Calculates the maximum number of contracts based on maximum allowed loss and stop loss
+ * @param stopLossPoints Stop loss points
+ * @param tickValue Contract tick value
+ * @param maxLoss Maximum allowed loss
+ * @returns Maximum number of contracts
  */
 export const calculateMaxContracts = (
   stopLossPoints: number,
@@ -31,13 +31,13 @@ export const calculateMaxContracts = (
 };
 
 /**
- * Calcule le nombre de micro contrats additionnels après avoir utilisé des mini contrats
- * @param maxLoss Perte maximale autorisée
- * @param miniContracts Nombre de mini contrats
- * @param stopLossPoints Points de stop loss
- * @param miniTickValue Valeur d'un tick pour mini contrat
- * @param microTickValue Valeur d'un tick pour micro contrat
- * @returns Nombre de micro contrats additionnels
+ * Calculates the number of additional micro contracts after using mini contracts
+ * @param maxLoss Maximum allowed loss
+ * @param miniContracts Number of mini contracts
+ * @param stopLossPoints Stop loss points
+ * @param miniTickValue Tick value for mini contract
+ * @param microTickValue Tick value for micro contract
+ * @returns Number of additional micro contracts
  */
 export const calculateAdditionalMicroContracts = (
   maxLoss: number,

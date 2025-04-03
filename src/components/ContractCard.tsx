@@ -1,6 +1,8 @@
 import React from 'react';
 import { ContractInfo } from '../types';
 import { calculateMaxContracts, calculateAdditionalMicroContracts } from '../utils/calculatorUtils';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../utils/i18n';
 
 interface ContractCardProps {
   symbol: string;
@@ -17,7 +19,10 @@ export const ContractCard: React.FC<ContractCardProps> = ({
   maxLoss,
   darkMode
 }) => {
-  // Utilisation des fonctions utilitaires
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  // Using utility functions
   const maxMiniContracts = calculateMaxContracts(
     stopLossPoints,
     contract.mini,
@@ -30,7 +35,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
     maxLoss
   );
   
-  // Micro contrats additionnels à utiliser avec les mini contrats
+  // Additional micro contracts to use with mini contracts
   const additionalMicros = calculateAdditionalMicroContracts(
     maxLoss,
     maxMiniContracts,
@@ -39,10 +44,10 @@ export const ContractCard: React.FC<ContractCardProps> = ({
     contract.micro
   );
   
-  // Déterminer s'il faut utiliser des mini contrats
+  // Determine if we should use mini contracts
   const useMini = maxMiniContracts > 0;
   
-  // Calculer la perte totale potentielle
+  // Calculate the total potential loss
   const totalLoss = (maxMiniContracts * stopLossPoints * contract.mini) + 
                     (additionalMicros * stopLossPoints * contract.micro);
 
@@ -84,7 +89,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
                 <span className={`absolute -top-2 -left-1 rounded-full text-xs px-2 py-1 font-semibold ${
                   darkMode ? 'bg-blue-800 text-blue-100' : 'bg-indigo-200 text-indigo-800'
                 }`}>
-                  MINI
+                  {t.contracts.mini}
                 </span>
               </div>
               <div className={`flex items-center justify-center h-16 px-3 font-bold text-2xl ${
@@ -105,7 +110,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
                 <span className={`absolute -top-2 -left-1 rounded-full text-xs px-2 py-1 font-semibold ${
                   darkMode ? 'bg-purple-800 text-purple-100' : 'bg-purple-200 text-purple-800'
                 }`}>
-                  MICRO
+                  {t.contracts.micro}
                 </span>
               </div>
             </div>
@@ -141,7 +146,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
                   <span className={`absolute -top-2 -left-1 rounded-full text-xs px-2 py-1 font-semibold ${
                     darkMode ? 'bg-blue-800 text-blue-100' : 'bg-indigo-200 text-indigo-800'
                   }`}>
-                    MINI
+                    {t.contracts.mini}
                   </span>
                 </div>
               </div>
@@ -176,7 +181,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
                   <span className={`absolute -top-2 -left-1 rounded-full text-xs px-2 py-1 font-semibold ${
                     darkMode ? 'bg-purple-800 text-purple-100' : 'bg-purple-200 text-purple-800'
                   }`}>
-                    MICRO
+                    {t.contracts.micro}
                   </span>
                 </div>
               </div>

@@ -19,7 +19,7 @@ export const useCalculator = () => {
     localStorage.setItem(PLATFORM_STORAGE_KEY, platform);
   }, [platform]);
 
-  // Utilisation de la fonction utilitaire pour le calcul
+  // Using the utility function for calculation
   const maxLoss = drawdown 
     ? calculateMaxLoss(parseFloat(drawdown), platform) 
     : 0;
