@@ -5,7 +5,9 @@ import { Header } from './components/Header';
 import { InputForm } from './components/InputForm';
 import { MaxLossDisplay } from './components/MaxLossDisplay';
 import { ContractList } from './components/ContractList';
+import { CfdCard } from './components/CfdCard';
 import { useTheme } from './contexts/ThemeContext';
+import { isCfdPlatform } from './utils/calculatorUtils';
 
 function App() {
   const { darkMode } = useTheme();
@@ -40,11 +42,21 @@ function App() {
             platform={platform} 
           />
 
-          <ContractList 
-            stopLossPoints={stopLossPoints}
-            maxLoss={maxLoss}
-            darkMode={darkMode}
-          />
+          {isCfdPlatform(platform) ? (
+            <div className="grid grid-cols-1 gap-4 mb-6">
+              <CfdCard
+                maxLoss={maxLoss}
+                stopLossPoints={stopLossPoints}
+                darkMode={darkMode}
+              />
+            </div>
+          ) : (
+            <ContractList 
+              stopLossPoints={stopLossPoints}
+              maxLoss={maxLoss}
+              darkMode={darkMode}
+            />
+          )}
         </div>
       )}
     </Layout>

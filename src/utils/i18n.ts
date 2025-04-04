@@ -54,6 +54,10 @@ export const translations = {
     contracts: {
       mini: "MINI",
       micro: "MICRO"
+    },
+    cfd: {
+      title: "CFD Position Calculation",
+      lots: "LOTS"
     }
   },
   fr: {
@@ -76,6 +80,10 @@ export const translations = {
     contracts: {
       mini: "MINI",
       micro: "MICRO"
+    },
+    cfd: {
+      title: "Calcul de Position CFD",
+      lots: "LOTS"
     }
   }
 };

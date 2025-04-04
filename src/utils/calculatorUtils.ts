@@ -1,6 +1,15 @@
 import { Platform } from '../types';
 
 /**
+ * Checks if a platform is a CFD platform
+ * @param platform Selected platform
+ * @returns Boolean indicating if platform is CFD type
+ */
+export const isCfdPlatform = (platform: Platform): boolean => {
+  return platform === 'FTMO/WGF';
+};
+
+/**
  * Calculates the maximum allowed loss based on drawdown and selected platform
  * @param drawdownValue Drawdown amount
  * @param platform Selected platform
@@ -9,6 +18,17 @@ import { Platform } from '../types';
 export const calculateMaxLoss = (drawdownValue: number, platform: Platform): number => {
   const divisor = platform === 'UFUNDED' ? 15 : 10;
   return drawdownValue / divisor;
+};
+
+/**
+ * Calculates the number of lots for CFD platforms
+ * @param maxLoss Maximum allowed loss amount
+ * @param stopLossPoints Stop loss points
+ * @returns Maximum number of lots
+ */
+export const calculateCfdLots = (maxLoss: number, stopLossPoints: number): number => {
+  if (!stopLossPoints) return 0;
+  return Math.floor(maxLoss / stopLossPoints);
 };
 
 /**

@@ -11,7 +11,7 @@ export const useCalculator = () => {
   
   const [platform, setPlatform] = useState<Platform>(() => {
     const savedPlatform = localStorage.getItem(PLATFORM_STORAGE_KEY);
-    return (savedPlatform as Platform) || 'TopStep';
+    return (savedPlatform as Platform) || 'TopStep/APEX';
   });
 
   // Save platform to localStorage whenever it changes

@@ -14,7 +14,7 @@ export interface ThemeContextType {
   toggleDarkMode: () => void;
 }
 
-export type Platform = 'TopStep' | 'FTMO' | 'WGF' | 'UFUNDED';
+export type Platform = 'TopStep/APEX' | 'FTMO/WGF' | 'UFUNDED';
 
 export interface InputProps {
   label: string;

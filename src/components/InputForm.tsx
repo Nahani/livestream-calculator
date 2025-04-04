@@ -28,9 +28,8 @@ export const InputForm: React.FC<InputFormProps> = ({
   const t = translations[language];
 
   const platformOptions = [
-    { value: 'TopStep', label: 'TopStep' },
-    { value: 'FTMO', label: 'FTMO' },
-    { value: 'WGF', label: 'WGF' },
+    { value: 'TopStep/APEX', label: 'TopStep / APEX' },
+    { value: 'FTMO/WGF', label: 'FTMO / WGF' },
     { value: 'UFUNDED', label: 'UFUNDED' }
   ];
 

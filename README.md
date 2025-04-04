@@ -53,7 +53,8 @@ The Livestream Calculator helps traders determine the optimal position size for 
 The calculator determines position sizing using this logic:
 
 1. **Maximum Loss Calculation**:
-   - For TopStep, FTMO, and WGF: `maxLoss = drawdown / 10`
+   - For TopStep and APEX: `maxLoss = drawdown / 10`
+   - For FTMO/WGF: `maxLoss = drawdown / 10`
    - For UFUNDED: `maxLoss = drawdown / 15`
 
 2. **Position Size Calculation**:
