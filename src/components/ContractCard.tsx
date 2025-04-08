@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ContractInfo } from '../types';
-import { calculateMaxContracts, calculateAdditionalMicroContracts } from '../utils/calculatorUtils';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/i18n';
-import { trackContractViewed } from '../utils/analytics';
+import { useContractCalculation } from '../hooks/useContractCalculation';
+import { ContractOption } from './contract/ContractOption';
 
 interface ContractCardProps {
   symbol: string;
@@ -23,46 +23,102 @@ export const ContractCard: React.FC<ContractCardProps> = ({
   const { language } = useLanguage();
   const t = translations[language];
 
-  // Using utility functions
-  const maxMiniContracts = calculateMaxContracts(
-    stopLossPoints,
-    contract.mini,
-    maxLoss
-  );
-
-  const maxMicroContracts = calculateMaxContracts(
-    stopLossPoints,
-    contract.micro,
-    maxLoss
-  );
-  
-  // Additional micro contracts to use with mini contracts
-  const additionalMicros = calculateAdditionalMicroContracts(
-    maxLoss,
+  // Use custom hook for calculations
+  const {
     maxMiniContracts,
-    stopLossPoints,
-    contract.mini,
-    contract.micro
-  );
-  
-  // Determine if we should use mini contracts
-  const useMini = maxMiniContracts > 0;
-  
-  // Calculate the total potential loss
-  const totalLoss = (maxMiniContracts * stopLossPoints * contract.mini) + 
-                    (additionalMicros * stopLossPoints * contract.micro);
+    maxMicroContracts,
+    additionalMicros,
+    useMini,
+    totalLoss,
+    potentialLossWithOneMoreMini,
+    potentialLossWithOneMoreMicro,
+    potentialLossWithConvertedMini,
+    canAddOneMoreMini,
+    canAddOneMoreMicro,
+    canConvertToMini
+  } = useContractCalculation(symbol, contract, stopLossPoints, maxLoss);
 
-  // Track contract view when component mounts or values change
-  useEffect(() => {
-    if (stopLossPoints && maxLoss) {
-      trackContractViewed(
-        symbol,
-        maxMiniContracts + maxMicroContracts,
-        stopLossPoints,
-        totalLoss
+  // Render the main display based on contract options
+  const renderMainOptions = () => {
+    if (useMini && additionalMicros > 0) {
+      return (
+        <div className="space-y-4">
+          {/* Current optimal option */}
+          <ContractOption
+            loss={totalLoss}
+            maxLoss={maxLoss}
+            miniCount={maxMiniContracts}
+            microCount={additionalMicros}
+            darkMode={darkMode}
+            t={t}
+          />
+          
+          {/* Additional mini option */}
+          {canAddOneMoreMini && (
+            <ContractOption
+              loss={potentialLossWithOneMoreMini}
+              maxLoss={maxLoss}
+              miniCount={maxMiniContracts + 1}
+              microCount={additionalMicros}
+              darkMode={darkMode}
+              t={t}
+              borderColor={darkMode ? 'bg-blue-600' : 'bg-indigo-600'}
+            />
+          )}
+          
+          {/* Additional micro option */}
+          {canAddOneMoreMicro && (
+            <ContractOption
+              loss={potentialLossWithOneMoreMicro}
+              maxLoss={maxLoss}
+              miniCount={maxMiniContracts}
+              microCount={additionalMicros + 1}
+              darkMode={darkMode}
+              t={t}
+              borderColor={darkMode ? 'bg-purple-600' : 'bg-purple-600'}
+            />
+          )}
+          
+          {/* Convert micro to mini option */}
+          {canConvertToMini && (
+            <ContractOption
+              loss={potentialLossWithConvertedMini}
+              maxLoss={maxLoss}
+              miniCount={maxMiniContracts + 1}
+              microCount={0}
+              darkMode={darkMode}
+              t={t}
+              borderColor={darkMode ? 'bg-blue-600' : 'bg-indigo-600'}
+            />
+          )}
+        </div>
+      );
+    } 
+    
+    if (useMini) {
+      return (
+        <ContractOption
+          loss={maxMiniContracts * stopLossPoints * contract.mini}
+          maxLoss={maxLoss}
+          miniCount={maxMiniContracts}
+          microCount={0}
+          darkMode={darkMode}
+          t={t}
+        />
       );
     }
-  }, [symbol, maxMiniContracts, maxMicroContracts, stopLossPoints, maxLoss, totalLoss]);
+    
+    return (
+      <ContractOption
+        loss={maxMicroContracts * stopLossPoints * contract.micro}
+        maxLoss={maxLoss}
+        miniCount={0}
+        microCount={maxMicroContracts}
+        darkMode={darkMode}
+        t={t}
+      />
+    );
+  };
 
   return (
     <div 
@@ -85,144 +141,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
         {contract.name} ({symbol})
       </h3>
       
-      {useMini && additionalMicros > 0 ? (
-        <div 
-          className={`overflow-hidden relative rounded-xl ${
-            darkMode 
-              ? 'bg-gray-800 shadow-lg shadow-gray-900/20' 
-              : 'bg-white shadow-lg shadow-indigo-100/70 border border-gray-200'
-          }`}
-          style={{ transition: 'background-color 0.3s ease, box-shadow 0.3s ease' }}
-        >
-          <div className="flex items-center justify-between p-4">
-            <div>
-              <p className={`font-medium text-lg transition-colors duration-300 ${
-                darkMode ? 'text-blue-300' : 'text-indigo-900'
-              }`}>
-                ${totalLoss.toFixed(0)}
-              </p>
-            </div>
-            <div className="flex items-center">
-              <div className="relative">
-                <div className={`flex items-center justify-center h-16 px-4 rounded-l-lg font-bold text-3xl ${
-                  darkMode 
-                    ? 'bg-gradient-to-r from-blue-700 to-blue-600 text-white' 
-                    : 'bg-gradient-to-r from-indigo-700 to-indigo-600 text-white'
-                }`}>
-                  {maxMiniContracts}
-                </div>
-                <span className={`absolute -top-2 -left-1 rounded-full text-xs px-2 py-1 font-semibold ${
-                  darkMode ? 'bg-blue-800 text-blue-100' : 'bg-indigo-200 text-indigo-800'
-                }`}>
-                  {t.contracts.mini}
-                </span>
-              </div>
-              <div className={`flex items-center justify-center h-16 px-3 font-bold text-2xl ${
-                darkMode 
-                  ? 'bg-gray-700 text-white' 
-                  : 'bg-gray-200 text-gray-700'
-              }`}>
-                +
-              </div>
-              <div className="relative">
-                <div className={`flex items-center justify-center h-16 px-4 rounded-r-lg font-bold text-3xl ${
-                  darkMode 
-                    ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white' 
-                    : 'bg-gradient-to-r from-purple-700 to-purple-600 text-white'
-                }`}>
-                  {additionalMicros}
-                </div>
-                <span className={`absolute -top-2 -left-1 rounded-full text-xs px-2 py-1 font-semibold ${
-                  darkMode ? 'bg-purple-800 text-purple-100' : 'bg-purple-200 text-purple-800'
-                }`}>
-                  {t.contracts.micro}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className={`absolute top-0 bottom-0 w-1 ${
-            darkMode ? 'bg-gradient-to-b from-blue-600 to-purple-600' : 'bg-gradient-to-b from-indigo-600 to-purple-600'
-          }`}></div>
-        </div>
-      ) : (
-        <div>
-          {useMini && (
-            <div 
-              className={`overflow-hidden relative rounded-xl ${
-                darkMode 
-                  ? 'bg-gray-800 shadow-lg shadow-gray-900/20' 
-                  : 'bg-white shadow-lg shadow-indigo-100/70 border border-gray-200'
-              }`}
-              style={{ transition: 'background-color 0.3s ease, box-shadow 0.3s ease' }}
-            >
-              <div className="flex items-center justify-between p-4">
-                <div>
-                  <p className={`font-medium text-lg transition-colors duration-300 ${
-                    darkMode ? 'text-blue-300' : 'text-indigo-900'
-                  }`}>
-                    ${(maxMiniContracts * stopLossPoints * contract.mini).toFixed(0)}
-                  </p>
-                </div>
-                <div className="relative">
-                  <div className={`flex items-center justify-center h-16 px-4 rounded-lg font-bold text-3xl ${
-                    darkMode 
-                      ? 'bg-gradient-to-r from-blue-700 to-blue-600 text-white' 
-                      : 'bg-gradient-to-r from-indigo-700 to-indigo-600 text-white'
-                  }`}>
-                    {maxMiniContracts}
-                  </div>
-                  <span className={`absolute -top-2 -left-1 rounded-full text-xs px-2 py-1 font-semibold ${
-                    darkMode ? 'bg-blue-800 text-blue-100' : 'bg-indigo-200 text-indigo-800'
-                  }`}>
-                    {t.contracts.mini}
-                  </span>
-                </div>
-              </div>
-              <div className={`absolute top-0 bottom-0 w-1 ${
-                darkMode ? 'bg-blue-600' : 'bg-indigo-600'
-              }`}></div>
-            </div>
-          )}
-          
-          {!useMini && (
-            <div 
-              className={`overflow-hidden relative rounded-xl ${
-                darkMode 
-                  ? 'bg-gray-800 shadow-lg shadow-gray-900/20' 
-                  : 'bg-white shadow-lg shadow-indigo-100/70 border border-gray-200'
-              }`}
-              style={{ transition: 'background-color 0.3s ease, box-shadow 0.3s ease' }}
-            >
-              <div className="flex items-center justify-between p-4">
-                <div>
-                  <p className={`font-medium text-lg transition-colors duration-300 ${
-                    darkMode ? 'text-blue-300' : 'text-indigo-900'
-                  }`}>
-                    ${(maxMicroContracts * stopLossPoints * contract.micro).toFixed(0)}
-                  </p>
-                </div>
-                <div className="relative">
-                  <div className={`flex items-center justify-center h-16 px-4 rounded-lg font-bold text-3xl ${
-                    darkMode 
-                      ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white' 
-                      : 'bg-gradient-to-r from-purple-700 to-purple-600 text-white'
-                  }`}>
-                    {maxMicroContracts}
-                  </div>
-                  <span className={`absolute -top-2 -left-1 rounded-full text-xs px-2 py-1 font-semibold ${
-                    darkMode ? 'bg-purple-800 text-purple-100' : 'bg-purple-200 text-purple-800'
-                  }`}>
-                    {t.contracts.micro}
-                  </span>
-                </div>
-              </div>
-              <div className={`absolute top-0 bottom-0 w-1 ${
-                darkMode ? 'bg-purple-600' : 'bg-purple-600'
-              }`}></div>
-            </div>
-          )}
-        </div>
-      )}
+      {renderMainOptions()}
     </div>
   );
 };

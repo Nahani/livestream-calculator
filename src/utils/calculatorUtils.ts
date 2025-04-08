@@ -75,4 +75,59 @@ export const calculateAdditionalMicroContracts = (
     : 0;
     
   return additionalMicros;
+};
+
+/**
+ * Calculates potential loss with additional contracts
+ * @param currentMiniContracts Current number of mini contracts
+ * @param additionalMiniContracts Additional mini contracts to add
+ * @param currentMicroContracts Current number of micro contracts
+ * @param additionalMicroContracts Additional micro contracts to add
+ * @param stopLossPoints Stop loss points
+ * @param miniTickValue Mini contract tick value
+ * @param microTickValue Micro contract tick value
+ * @returns Total potential loss
+ */
+export const calculatePotentialLoss = (
+  currentMiniContracts: number,
+  additionalMiniContracts: number,
+  currentMicroContracts: number,
+  additionalMicroContracts: number,
+  stopLossPoints: number,
+  miniTickValue: number,
+  microTickValue: number
+): number => {
+  const totalMiniLoss = (currentMiniContracts + additionalMiniContracts) * stopLossPoints * miniTickValue;
+  const totalMicroLoss = (currentMicroContracts + additionalMicroContracts) * stopLossPoints * microTickValue;
+  return totalMiniLoss + totalMicroLoss;
+};
+
+/**
+ * Checks if adding micro contracts would reach conversion threshold
+ * @param currentMicroContracts Current number of micro contracts
+ * @param additionalMicroContracts Additional micro contracts to add
+ * @returns Whether the total would reach conversion threshold
+ */
+export const wouldReachConversionThreshold = (
+  currentMicroContracts: number,
+  additionalMicroContracts: number
+): boolean => {
+  return currentMicroContracts + additionalMicroContracts === 10;
+};
+
+/**
+ * Calculates whether additional contracts can be added within loss limit
+ * @param currentLoss Current total loss
+ * @param potentialLoss Potential total loss after adding contracts
+ * @param maxLoss Maximum allowed loss
+ * @param maxLossPercentage Maximum allowed loss percentage (e.g. 1.02 for 2% over)
+ * @returns Whether additional contracts can be added
+ */
+export const canAddContracts = (
+  currentLoss: number,
+  potentialLoss: number,
+  maxLoss: number,
+  maxLossPercentage: number = 1.02
+): boolean => {
+  return currentLoss > 0 && potentialLoss <= maxLoss * maxLossPercentage;
 }; 

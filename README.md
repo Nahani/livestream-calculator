@@ -27,12 +27,24 @@ The Livestream Calculator helps traders determine the optimal position size for 
   </table>
 </div>
 
+## 🆕 Recent Updates
+
+The calculator now includes several new features to help traders optimize their position sizing:
+
+- **Alternative Position Sizing**: The calculator now shows additional position sizing options that remain within 2% of your maximum allowed loss, giving you more flexibility.
+- **Smart Contract Conversion**: When adding a micro contract would result in 10 micros, the calculator automatically suggests converting to an additional mini contract.
+- **Risk Warning Indicators**: Visual warning icons appear when a position size exceeds the maximum allowed loss based on your platform's rules.
+- **Improved Architecture**: The codebase has been refactored for better maintainability, with clear separation between calculation logic and UI components.
+
 ## ✨ Features
 
 - 📈 Calculate maximum position sizes for different futures contracts
 - 🏢 Support for multiple trading platforms (TopStep, FTMO, WGF, UFUNDED)
 - 🧮 Different calculation methods based on selected platform
 - 📱 Mini and Micro contract recommendations
+- 🔢 Smart conversion of 10 micro contracts to 1 mini contract
+- ⚠️ Warning indicators for positions exceeding maximum allowed loss
+- 💹 Alternative position sizing suggestions within 2% of maximum allowed loss
 - 🌓 Dark and light mode support
 - 🌍 Multilingual support (English and French)
 - 💾 Persistent settings via local storage
@@ -65,13 +77,22 @@ The calculator determines position sizing using this logic:
    - First fills mini contracts (larger size)
    - If capital remains, adds micro contracts (smaller size)
    - Shows combined view when both are used
+   - Automatically converts 10 micro contracts to 1 mini contract
 
-4. **Visual Indicators**:
+4. **Alternative Position Sizing**:
+   - Shows additional options within 2% of maximum allowed loss
+   - Displays positions with one additional mini contract (if within limits)
+   - Displays positions with one additional micro contract (if within limits)
+   - Warning indicators appear for positions exceeding maximum allowed loss
+
+5. **Visual Indicators**:
    - 🔵 Blue: Mini contracts
    - 🟣 Purple: Micro contracts
+   - 🟢 Green: CFD lots
+   - ⚠️ Yellow warning icon: Exceeds maximum allowed loss
    - Shows clear dollar value of risk taken
 
-This ensures traders can maximize their position size while staying within risk management rules of their chosen platform.
+This ensures traders can maximize their position size while staying within risk management rules of their chosen platform, with additional flexibility for optimal position sizing.
 
 ## 🌍 Language Support
 
@@ -93,16 +114,39 @@ The application automatically detects your browser's language settings and displ
 
 The application follows a modern React architecture with:
 
-- 🧩 Component-based design
+- 🧩 Component-based design with reusable UI components
 - 🔄 React Context API for state management
-- 🪝 Custom hooks for business logic
+- 🪝 Custom hooks for business logic separation
 - 🎭 Theme and language contexts for UI preferences
 - 📱 Responsive design for mobile and desktop
+- 🧠 Improved separation of concerns with specialized hooks and components
+
+The architecture has been refactored to improve maintainability and scalability:
+
+#### 🪝 Custom Hooks
+- `useContractCalculation`: Encapsulates all contract calculation logic
+- `useCfdCalculation`: Encapsulates all CFD calculation logic
+
+#### 🧩 UI Components
+- `ContractOption`: Reusable component for displaying contract options
+- `CfdOption`: Reusable component for displaying CFD options
+- `ContractCard`: Container component using the specialized hooks and UI components
+- `CfdCard`: Container component using the specialized hooks and UI components
+
+This architecture provides:
+- 📋 Better separation of concerns
+- 🔄 Increased code reusability
+- 🧪 Improved testability
+- 🧠 Enhanced maintainability
 
 ### 🧩 Key Components
 
-- `useCalculator`: Hook for calculator logic and state
+- `useContractCalculation`: Hook for contract calculation logic
+- `useCfdCalculation`: Hook for CFD calculation logic
+- `ContractOption`: Reusable UI component for contract options
+- `CfdOption`: Reusable UI component for CFD options
 - `ContractCard`: Displays position sizing for each contract
+- `CfdCard`: Displays position sizing for CFD
 - `ThemeProvider`: Manages dark/light mode
 - `LanguageProvider`: Manages language preferences (English/French)
 - `calculatorUtils.ts`: Utility functions for calculations
