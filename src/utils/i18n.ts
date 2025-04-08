@@ -62,6 +62,9 @@ export const translations = {
       title: "CFD Position Calculation",
       lots: "LOTS",
       spreadNote: "Pensez à rajouter votre spread"
+    },
+    challengeNote: {
+      text: "For challenges, indicate your remaining drawdown x 10"
     }
   },
   fr: {
@@ -92,6 +95,9 @@ export const translations = {
       title: "Calcul de Position CFD",
       lots: "LOTS",
       spreadNote: "Pensez à rajouter votre spread"
+    },
+    challengeNote: {
+      text: "En challenge indiquez votre drawdown restant x 10"
     }
   }
 };
