@@ -18,7 +18,7 @@ export const MaxLossDisplay: React.FC<MaxLossDisplayProps> = ({ maxLoss, platfor
   const explanation = t.maxLoss.calculatedWith(platform);
 
   return (
-    <div className={`mb-6 p-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${
+    <div className={`mb-6 p-4 flex flex-col items-center justify-center rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${
       darkMode 
         ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10' 
         : 'bg-gradient-to-r from-indigo-50 to-purple-50'
@@ -28,7 +28,7 @@ export const MaxLossDisplay: React.FC<MaxLossDisplayProps> = ({ maxLoss, platfor
       }`}>
         {title}
       </h2>
-      <p className={`text-2xl font-bold transition-colors duration-300 ${
+      <p className={`text-3xl font-bold transition-colors duration-300 ${
         darkMode ? 'text-blue-400' : 'text-indigo-600'
       }`}>
         ${maxLoss.toFixed(0)}

@@ -15,6 +15,11 @@ interface InputFormProps {
   setPlatform: (value: Platform) => void;
 }
 
+interface PlatformOption {
+  value: Platform['name'];
+  label: string;
+}
+
 export const InputForm: React.FC<InputFormProps> = ({
   drawdown,
   setDrawdown,
@@ -27,14 +32,34 @@ export const InputForm: React.FC<InputFormProps> = ({
   const { language } = useLanguage();
   const t = translations[language];
 
-  const platformOptions = [
+  const platformOptions: PlatformOption[] = [
     { value: 'TopStep/APEX', label: 'TopStep / APEX' },
     { value: 'FTMO/WGF', label: 'FTMO / WGF' },
     { value: 'UFUNDED', label: 'UFUNDED' }
   ];
 
+  const divisorOptions = [
+    { value: '10', label: '1/10' },
+    { value: '15', label: '1/15' }
+  ];
+
+  const handlePlatformChange = (value: string) => {
+    const newDivisor = value === 'UFUNDED' ? 15 : 10;
+    setPlatform({
+      name: value as Platform['name'],
+      drawdownDivisor: newDivisor
+    });
+  };
+
+  const handleDivisorChange = (value: string) => {
+    setPlatform({
+      name: platform.name,
+      drawdownDivisor: parseInt(value) as 10 | 15
+    });
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 animate-fade-in">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 animate-fade-in">
       <NumberInput
         label={t.drawdown.label}
         value={drawdown}
@@ -52,9 +77,16 @@ export const InputForm: React.FC<InputFormProps> = ({
       />
       <Select
         label={t.platform.label}
-        value={platform}
-        onChange={(value) => setPlatform(value as Platform)}
+        value={platform.name}
+        onChange={handlePlatformChange}
         options={platformOptions}
+        darkMode={darkMode}
+      />
+      <Select
+        label={t.drawdownDivisor.label}
+        value={platform.drawdownDivisor.toString()}
+        onChange={handleDivisorChange}
+        options={divisorOptions}
         darkMode={darkMode}
       />
     </div>

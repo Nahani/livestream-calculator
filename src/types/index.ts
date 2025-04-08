@@ -14,7 +14,10 @@ export interface ThemeContextType {
   toggleDarkMode: () => void;
 }
 
-export type Platform = 'TopStep/APEX' | 'FTMO/WGF' | 'UFUNDED';
+export type Platform = {
+  name: 'TopStep/APEX' | 'FTMO/WGF' | 'UFUNDED';
+  drawdownDivisor: 10 | 15;
+}
 
 export interface InputProps {
   label: string;

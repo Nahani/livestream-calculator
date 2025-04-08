@@ -83,7 +83,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
         >
           <div className="flex items-center justify-between p-4">
             <div>
-              <p className={`font-medium transition-colors duration-300 ${
+              <p className={`font-medium text-lg transition-colors duration-300 ${
                 darkMode ? 'text-blue-300' : 'text-indigo-900'
               }`}>
                 ${totalLoss.toFixed(0)}
@@ -144,7 +144,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
             >
               <div className="flex items-center justify-between p-4">
                 <div>
-                  <p className={`font-medium transition-colors duration-300 ${
+                  <p className={`font-medium text-lg transition-colors duration-300 ${
                     darkMode ? 'text-blue-300' : 'text-indigo-900'
                   }`}>
                     ${(maxMiniContracts * stopLossPoints * contract.mini).toFixed(0)}
@@ -182,7 +182,7 @@ export const ContractCard: React.FC<ContractCardProps> = ({
             >
               <div className="flex items-center justify-between p-4">
                 <div>
-                  <p className={`font-medium transition-colors duration-300 ${
+                  <p className={`font-medium text-lg transition-colors duration-300 ${
                     darkMode ? 'text-blue-300' : 'text-indigo-900'
                   }`}>
                     ${(maxMicroContracts * stopLossPoints * contract.micro).toFixed(0)}

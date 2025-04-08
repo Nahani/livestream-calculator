@@ -6,7 +6,7 @@ import { Platform } from '../types';
  * @returns Boolean indicating if platform is CFD type
  */
 export const isCfdPlatform = (platform: Platform): boolean => {
-  return platform === 'FTMO/WGF';
+  return platform.name === 'FTMO/WGF' || platform.name === 'UFUNDED';
 };
 
 /**
@@ -16,8 +16,7 @@ export const isCfdPlatform = (platform: Platform): boolean => {
  * @returns Maximum allowed loss amount
  */
 export const calculateMaxLoss = (drawdownValue: number, platform: Platform): number => {
-  const divisor = platform === 'UFUNDED' ? 15 : 10;
-  return drawdownValue / divisor;
+  return drawdownValue / platform.drawdownDivisor;
 };
 
 /**

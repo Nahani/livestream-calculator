@@ -54,7 +54,7 @@ export const CfdCard: React.FC<CfdCardProps> = ({
       >
         <div className="flex items-center justify-between p-4">
           <div>
-            <p className={`font-medium transition-colors duration-300 ${
+            <p className={`font-medium text-lg transition-colors duration-300 ${
               darkMode ? 'text-blue-300' : 'text-indigo-900'
             }`}>
               ${totalLoss.toFixed(0)}
@@ -78,7 +78,13 @@ export const CfdCard: React.FC<CfdCardProps> = ({
         <div className={`absolute top-0 bottom-0 w-1 ${
           darkMode ? 'bg-green-600' : 'bg-green-600'
         }`}></div>
+        
       </div>
+      <p className={`mt-2 text-sm text-center ${
+          darkMode ? 'text-gray-400' : 'text-gray-600'
+        }`}>
+          {t.cfd.spreadNote}
+        </p>
     </div>
   );
 }; 

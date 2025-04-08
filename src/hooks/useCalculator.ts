@@ -11,12 +11,30 @@ export const useCalculator = () => {
   
   const [platform, setPlatform] = useState<Platform>(() => {
     const savedPlatform = localStorage.getItem(PLATFORM_STORAGE_KEY);
-    return (savedPlatform as Platform) || 'TopStep/APEX';
+    if (savedPlatform) {
+      try {
+        const parsed = JSON.parse(savedPlatform);
+        return {
+          name: parsed.name,
+          drawdownDivisor: parsed.drawdownDivisor
+        };
+      } catch {
+        // Fallback to default if parsing fails
+        return {
+          name: 'TopStep/APEX',
+          drawdownDivisor: 10
+        };
+      }
+    }
+    return {
+      name: 'TopStep/APEX',
+      drawdownDivisor: 10
+    };
   });
 
   // Save platform to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem(PLATFORM_STORAGE_KEY, platform);
+    localStorage.setItem(PLATFORM_STORAGE_KEY, JSON.stringify(platform));
   }, [platform]);
 
   // Using the utility function for calculation

@@ -46,10 +46,13 @@ export const translations = {
     platform: {
       label: "Platform"
     },
+    drawdownDivisor: {
+      label: "Drawdown Risk"
+    },
     maxLoss: {
       title: "Maximum Allowed Loss",
       calculatedWith: (platform: Platform) => 
-        platform === 'UFUNDED' ? 'Calculated with 1/15 of drawdown' : 'Calculated with 1/10 of drawdown'
+        `Calculated with 1/${platform.drawdownDivisor} of drawdown`
     },
     contracts: {
       mini: "MINI",
@@ -57,7 +60,8 @@ export const translations = {
     },
     cfd: {
       title: "CFD Position Calculation",
-      lots: "LOTS"
+      lots: "LOTS",
+      spreadNote: "Pensez à rajouter votre spread"
     }
   },
   fr: {
@@ -72,10 +76,13 @@ export const translations = {
     platform: {
       label: "Plateforme"
     },
+    drawdownDivisor: {
+      label: "Risque Drawdown"
+    },
     maxLoss: {
       title: "Perte Maximale Autorisée",
       calculatedWith: (platform: Platform) => 
-        platform === 'UFUNDED' ? 'Calculé avec 1/15 du drawdown' : 'Calculé avec 1/10 du drawdown'
+        `Calculé avec 1/${platform.drawdownDivisor} du drawdown`
     },
     contracts: {
       mini: "MINI",
@@ -83,7 +90,8 @@ export const translations = {
     },
     cfd: {
       title: "Calcul de Position CFD",
-      lots: "LOTS"
+      lots: "LOTS",
+      spreadNote: "Pensez à rajouter votre spread"
     }
   }
 };
