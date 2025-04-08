@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ContractInfo } from '../types';
 import { calculateMaxContracts, calculateAdditionalMicroContracts } from '../utils/calculatorUtils';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/i18n';
+import { trackContractViewed } from '../utils/analytics';
 
 interface ContractCardProps {
   symbol: string;
@@ -50,6 +51,18 @@ export const ContractCard: React.FC<ContractCardProps> = ({
   // Calculate the total potential loss
   const totalLoss = (maxMiniContracts * stopLossPoints * contract.mini) + 
                     (additionalMicros * stopLossPoints * contract.micro);
+
+  // Track contract view when component mounts or values change
+  useEffect(() => {
+    if (stopLossPoints && maxLoss) {
+      trackContractViewed(
+        symbol,
+        maxMiniContracts + maxMicroContracts,
+        stopLossPoints,
+        totalLoss
+      );
+    }
+  }, [symbol, maxMiniContracts, maxMicroContracts, stopLossPoints, maxLoss, totalLoss]);
 
   return (
     <div 

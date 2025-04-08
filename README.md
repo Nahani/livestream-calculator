@@ -36,6 +36,7 @@ The Livestream Calculator helps traders determine the optimal position size for 
 - 🌓 Dark and light mode support
 - 🌍 Multilingual support (English and French)
 - 💾 Persistent settings via local storage
+- 📊 Usage analytics with Firebase
 
 ## 🚀 Usage
 
@@ -86,6 +87,7 @@ The application automatically detects your browser's language settings and displ
 - **📘 TypeScript**: Type-safe JavaScript
 - **🎨 TailwindCSS**: Utility-first CSS framework
 - **⚡ Vite**: Build tool and development environment
+- **🔥 Firebase**: Analytics and usage tracking
 
 ### 🏗️ Architecture
 
@@ -103,7 +105,8 @@ The application follows a modern React architecture with:
 - `ContractCard`: Displays position sizing for each contract
 - `ThemeProvider`: Manages dark/light mode
 - `LanguageProvider`: Manages language preferences (English/French)
-- Utility functions for calculations in `calculatorUtils.ts`
+- `calculatorUtils.ts`: Utility functions for calculations
+- `analytics.ts`: Firebase Analytics event tracking utilities
 
 ## 💻 Development
 
@@ -163,3 +166,39 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - 👩‍💻 Created for trading communities
 - 📈 Designed to help traders manage risk effectively 
+
+## 📊 Analytics Integration
+
+The application includes Firebase Analytics to track usage patterns and improve user experience. The following events are tracked:
+
+### 🔄 Calculation Events
+- `calculation_performed`: Tracks calculation details including drawdown, stop loss, and platform
+- `platform_changed`: Monitors platform selection changes
+- `divisor_changed`: Tracks changes in drawdown divisor settings
+
+### 👥 User Preference Events
+- `theme_changed`: Tracks dark/light mode preferences
+- `language_changed`: Monitors language selection changes
+
+### 📈 Trading Events
+- `contract_viewed`: Tracks which contracts users are viewing and their parameters
+- `cfd_calculation`: Monitors CFD-specific calculations
+
+All analytics are privacy-focused and used only to improve the calculator's functionality. No personal information is collected.
+
+### 🔒 Analytics Setup
+
+To enable analytics in your deployment:
+
+1. Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/)
+2. Add your web application to get the configuration
+3. Create a `.env` file with your Firebase configuration:
+   ```env
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
+   ``` 

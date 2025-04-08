@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { defaultLanguage } from '../utils/i18n';
+import { trackLanguageChange } from '../utils/analytics';
 
 type Language = 'en' | 'fr';
 
@@ -37,6 +38,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   // Save language to localStorage when it changes
   useEffect(() => {
     localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+    trackLanguageChange(language);
   }, [language]);
 
   // Function to change language

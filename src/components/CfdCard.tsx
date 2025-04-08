@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { calculateCfdLots } from '../utils/calculatorUtils';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/i18n';
+import { trackCfdCalculation } from '../utils/analytics';
 
 interface CfdCardProps {
   maxLoss: number;
@@ -23,6 +24,17 @@ export const CfdCard: React.FC<CfdCardProps> = ({
   // Calculate the total potential loss
   const totalLoss = stopLossPoints ? maxLots * stopLossPoints : 0;
   
+  // Track CFD calculations when values change
+  useEffect(() => {
+    if (stopLossPoints && maxLoss) {
+      trackCfdCalculation(
+        maxLots,
+        stopLossPoints,
+        totalLoss
+      );
+    }
+  }, [maxLots, stopLossPoints, maxLoss, totalLoss]);
+
   return (
     <div 
       className={`rounded-2xl p-6 ${

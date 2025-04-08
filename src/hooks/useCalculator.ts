@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Platform } from '../types';
 import { calculateMaxLoss } from '../utils/calculatorUtils';
+import { trackCalculation, trackPlatformChange } from '../utils/analytics';
 
 // Key for localStorage
 const PLATFORM_STORAGE_KEY = 'calculator_platform';
@@ -35,6 +36,7 @@ export const useCalculator = () => {
   // Save platform to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem(PLATFORM_STORAGE_KEY, JSON.stringify(platform));
+    trackPlatformChange(platform);
   }, [platform]);
 
   // Using the utility function for calculation
@@ -43,6 +45,18 @@ export const useCalculator = () => {
     : 0;
     
   const stopLossPoints = stopLoss ? parseFloat(stopLoss) : 0;
+
+  // Track calculation when values change
+  useEffect(() => {
+    if (drawdown && stopLoss) {
+      trackCalculation(
+        parseFloat(drawdown),
+        stopLossPoints,
+        platform,
+        maxLoss
+      );
+    }
+  }, [drawdown, stopLoss, platform, maxLoss]);
 
   return {
     drawdown,

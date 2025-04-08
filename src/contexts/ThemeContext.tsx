@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { ThemeContextType } from '../types';
+import { trackThemeChange } from '../utils/analytics';
 
 // Creating context with default value
 const ThemeContext = createContext<ThemeContextType>({
@@ -25,14 +26,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     return savedTheme ? savedTheme === 'dark' : true;
   });
 
-  // Save theme to localStorage when it changes
-  useEffect(() => {
-    localStorage.setItem(THEME_STORAGE_KEY, darkMode ? 'dark' : 'light');
-  }, [darkMode]);
-
   // Function to toggle between modes
   const toggleDarkMode = () => {
-    setDarkMode(prev => !prev);
+    setDarkMode(prev => {
+      const newValue = !prev;
+      localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(newValue));
+      trackThemeChange(newValue);
+      return newValue;
+    });
   };
 
   return (
