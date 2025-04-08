@@ -92,7 +92,7 @@ export const CfdCard: React.FC<CfdCardProps> = ({
         }`}></div>
         
       </div>
-      <p className={`mt-2 text-sm text-center ${
+      <p className={`mt-2 text-sm text-center italic ${
           darkMode ? 'text-gray-400' : 'text-gray-600'
         }`}>
           {t.cfd.spreadNote}

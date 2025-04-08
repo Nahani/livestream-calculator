@@ -75,4 +75,11 @@ export const trackCfdCalculation = (
     stop_loss_points: stopLossPoints,
     total_potential_loss: totalLoss
   });
+};
+
+// Events related to external links
+export const trackYoutubeClick = () => {
+  trackEvent('youtube_channel_click', {
+    channel: 'Romain Bailleul'
+  });
 }; 

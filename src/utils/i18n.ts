@@ -32,6 +32,11 @@ export const getBrowserLanguage = (): Language => {
   return 'en';
 };
 
+const getPercentageFromDivisor = (divisor: number): string => {
+  const percentage = (1 / divisor) * 100;
+  return percentage % 1 === 0 ? percentage.toString() : (Math.floor(percentage * 100) / 100).toFixed(2);
+};
+
 // Translations for the application
 export const translations = {
   en: {
@@ -52,7 +57,7 @@ export const translations = {
     maxLoss: {
       title: "Maximum Allowed Loss",
       calculatedWith: (platform: Platform) => 
-        `Calculated with 1/${platform.drawdownDivisor} of drawdown`
+        `Calculated with ${getPercentageFromDivisor(platform.drawdownDivisor)}% of drawdown`
     },
     contracts: {
       mini: "MINI",
@@ -61,7 +66,7 @@ export const translations = {
     cfd: {
       title: "CFD Position Calculation",
       lots: "LOTS",
-      spreadNote: "Pensez à rajouter votre spread"
+      spreadNote: "Don't forget to add your spread!"
     },
     challengeNote: {
       text: "For challenges, indicate your remaining drawdown x 10"
@@ -85,7 +90,7 @@ export const translations = {
     maxLoss: {
       title: "Perte Maximale Autorisée",
       calculatedWith: (platform: Platform) => 
-        `Calculé avec 1/${platform.drawdownDivisor} du drawdown`
+        `Calculé avec ${getPercentageFromDivisor(platform.drawdownDivisor)}% du drawdown`
     },
     contracts: {
       mini: "MINI",
@@ -94,7 +99,7 @@ export const translations = {
     cfd: {
       title: "Calcul de Position CFD",
       lots: "LOTS",
-      spreadNote: "Pensez à rajouter votre spread"
+      spreadNote: "Pensez à rajouter votre spread !"
     },
     challengeNote: {
       text: "En challenge indiquez votre drawdown restant x 10"

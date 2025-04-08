@@ -30,7 +30,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const toggleDarkMode = () => {
     setDarkMode(prev => {
       const newValue = !prev;
-      localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(newValue));
+      localStorage.setItem(THEME_STORAGE_KEY, newValue ? 'dark' : 'light');
       trackThemeChange(newValue);
       return newValue;
     });

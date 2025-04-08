@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
     <div className="flex items-center justify-between mb-6">
       <div className="flex flex-col md:flex-row items-center gap-3 animate-slide-in">
         <div className={`p-2 rounded-xl transition-colors duration-300 ${
-          darkMode ? 'bg-blue-500/10' : 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
+          darkMode ? 'bg-blue-500/10' : 'bg-gradient-to-br from-blue-950 via-[#000b2e] to-blue-950'
         }`}>
           <img 
             src="/logo.png" 

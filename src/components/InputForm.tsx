@@ -39,8 +39,8 @@ export const InputForm: React.FC<InputFormProps> = ({
   ];
 
   const divisorOptions = [
-    { value: '10', label: '1/10' },
-    { value: '15', label: '1/15' }
+    { value: '10', label: '10%' },
+    { value: '15', label: '6.66%' }
   ];
 
   const handlePlatformChange = (value: string) => {
@@ -69,7 +69,7 @@ export const InputForm: React.FC<InputFormProps> = ({
           prefix="$"
           darkMode={darkMode}
         />
-        <p className={`text-[0.6rem] sm:text-xs mt-1 italic ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+        <p className={`text-[0.65rem] mt-1 italic ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
           * {t.challengeNote.text}
         </p>
       </div>

@@ -1,8 +1,13 @@
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { trackYoutubeClick } from '../utils/analytics';
 
 export const Footer: React.FC = () => {
   const { darkMode } = useTheme();
+
+  const handleYoutubeClick = () => {
+    trackYoutubeClick();
+  };
 
   return (
     <footer className={`py-1 md:py-2 text-[10px] md:text-xs ${
@@ -19,10 +24,11 @@ export const Footer: React.FC = () => {
             href="https://www.youtube.com/@romainbailleul" 
             target="_blank" 
             rel="noopener noreferrer"
+            onClick={handleYoutubeClick}
             className={`hover:opacity-80 transition-opacity flex items-center space-x-1 md:space-x-2 ${
               darkMode ? 'text-white' : 'text-gray-800'
             }`}
-            title="Visiter notre chaîne YouTube"
+            title="Visiter la chaîne YouTube de Romain Bailleul"
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
