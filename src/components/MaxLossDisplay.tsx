@@ -31,7 +31,7 @@ export const MaxLossDisplay: React.FC<MaxLossDisplayProps> = ({ maxLoss, platfor
       <p className={`text-2xl font-bold transition-colors duration-300 ${
         darkMode ? 'text-blue-400' : 'text-indigo-600'
       }`}>
-        ${maxLoss.toFixed(2)}
+        ${maxLoss.toFixed(0)}
       </p>
       <p className={`text-sm transition-colors duration-300 ${
         darkMode ? 'text-gray-400' : 'text-gray-600'
