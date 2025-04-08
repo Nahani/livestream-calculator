@@ -69,7 +69,7 @@ export const translations = {
       spreadNote: "Don't forget to add your spread!"
     },
     challengeNote: {
-      text: "For challenges, indicate your remaining drawdown x 10"
+      text: "For Topstep/Apex challenges, enter your accepted loss per trade multiplied by 10 (e.g., if you want to risk $1,000, enter $10,000)"
     }
   },
   fr: {
@@ -102,7 +102,7 @@ export const translations = {
       spreadNote: "Pensez à rajouter votre spread !"
     },
     challengeNote: {
-      text: "En challenge indiquez votre drawdown restant x 10"
+      text: "En challenge Topstep/Apex, indiquez votre perte acceptée par trade x10 (ex : si vous souhaitez risquer 1 000, indiquez 10 000)"
     }
   }
 };

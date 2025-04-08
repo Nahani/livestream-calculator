@@ -59,20 +59,16 @@ export const InputForm: React.FC<InputFormProps> = ({
   };
 
   return (
+    <>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 animate-fade-in">
-      <div>
         <NumberInput
-          label={t.drawdown.label + '*'}
+          label={t.drawdown.label + ' *'}
           value={drawdown}
           onChange={setDrawdown}
           placeholder={t.drawdown.placeholder}
           prefix="$"
           darkMode={darkMode}
         />
-        <p className={`text-[0.65rem] mt-1 italic ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-          * {t.challengeNote.text}
-        </p>
-      </div>
       <NumberInput
         label={t.stopLoss.label}
         value={stopLoss}
@@ -95,5 +91,9 @@ export const InputForm: React.FC<InputFormProps> = ({
         darkMode={darkMode}
       />
     </div>
+    <p className={`text-[0.6rem] sm:text-[0.7rem] mt-1 italic ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+          * {t.challengeNote.text}
+        </p>
+    </>
   );
 }; 
