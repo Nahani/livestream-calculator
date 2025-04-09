@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
             rel="noopener noreferrer"
             onClick={handleYoutubeClick}
             className={`hover:opacity-80 transition-opacity flex items-center space-x-1 md:space-x-2 ${
-              darkMode ? 'text-white' : 'text-gray-800'
+              darkMode ? 'text-gray-400' : 'text-gray-800'
             }`}
             title="Visiter la chaîne YouTube de Romain Bailleul"
           >
