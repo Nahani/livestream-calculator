@@ -8,6 +8,7 @@ import { ContractList } from './components/ContractList';
 import { CfdCard } from './components/CfdCard';
 import { useTheme } from './contexts/ThemeContext';
 import { isCfdPlatform } from './utils/calculatorUtils';
+import { SEO } from './components/SEO';
 
 function App() {
   const { darkMode } = useTheme();
@@ -24,6 +25,7 @@ function App() {
   
   return (
     <Layout>
+      <SEO />
       <Header />
       
       <InputForm

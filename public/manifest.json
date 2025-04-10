@@ -1,0 +1,28 @@
+{
+  "name": "Livestream Calculator",
+  "short_name": "LST Calculator",
+  "description": "Position sizing calculator for traders",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "lang": "en",
+  "dir": "ltr",
+  "orientation": "portrait",
+  "categories": ["finance", "utilities", "productivity"],
+  "screenshots": [
+    {
+      "src": "og-image.svg",
+      "sizes": "1200x630",
+      "type": "image/svg+xml"
+    }
+  ]
+} 

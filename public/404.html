@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | LIVESTREAM CALCULATOR</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Page not found error (404). You will be redirected to the homepage.">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(to bottom right, #111b51, #0c2369);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 2rem;
+      background-color: rgba(0, 11, 46, 0.8);
+      border-radius: 1rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #6366F1, #A855F7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .button {
+      display: inline-block;
+      background: linear-gradient(to right, #6366F1, #A855F7);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+    }
+    .button:focus {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      color: white;
+      opacity: 0.7;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+    }
+    .lang-btn.active {
+      background: rgba(255,255,255,0.2);
+      opacity: 1;
+    }
+    .lang-btn:focus {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Page Not Found",
+      "description": "The requested page could not be found.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "LIVESTREAM CALCULATOR",
+        "url": "https://livestream-calculator.web.app"
+      }
+    }
+  </script>
+  <script>
+    // ---------------
+    // Matching the same language detection as in src/utils/i18n.ts
+    // ---------------
+    
+    // Language storage key from app
+    const LANGUAGE_STORAGE_KEY = 'calculator_language';
+    let currentLang = 'en';
+    
+    /**
+     * Detects browser language using the same logic as in src/utils/i18n.ts
+     */
+    function getBrowserLanguage() {
+      // First try the main navigator.language (this matches i18n.ts)
+      const primaryLanguage = navigator.language.toLowerCase();
+      
+      if (primaryLanguage.startsWith('fr')) {
+        return 'fr';
+      }
+      
+      // If not found, try the navigator.languages array if available
+      if (navigator.languages && navigator.languages.length) {
+        // Check if any of the preferred languages start with 'fr'
+        for (const lang of navigator.languages) {
+          if (lang.toLowerCase().startsWith('fr')) {
+            return 'fr';
+          }
+        }
+      }
+      
+      // Default to English if no French language is found
+      return 'en';
+    }
+    
+    function getPreferredLanguage() {
+      // Check URL param first
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = urlParams.get('lang');
+      if (langParam === 'fr' || langParam === 'en') {
+        return langParam;
+      }
+      
+      // Check localStorage second
+      const storedLang = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+      if (storedLang === 'fr' || storedLang === 'en') {
+        return storedLang;
+      }
+      
+      // Check browser language using the same logic as in i18n.ts
+      return getBrowserLanguage();
+    }
+    
+    // ---------------
+    // Translations - matches structure from i18n.ts
+    // ---------------
+    const translations = {
+      en: {
+        notFound: {
+          title: "Page Not Found",
+          message: "The page you are looking for doesn't exist or has been moved.",
+          redirect: "You will be redirected to the home page in 5 seconds.",
+          button: "Back to Home",
+          description: "Page not found error (404). You will be redirected to the homepage.",
+          changeLanguage: "Change language"
+        }
+      },
+      fr: {
+        notFound: {
+          title: "Page Non Trouvée",
+          message: "La page que vous recherchez n'existe pas ou a été déplacée.",
+          redirect: "Vous serez redirigé vers la page d'accueil dans 5 secondes.",
+          button: "Retour à l'accueil",
+          description: "Erreur page non trouvée (404). Vous allez être redirigé vers la page d'accueil.",
+          changeLanguage: "Changer de langue"
+        }
+      }
+    };
+    
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+      currentLang = lang;
+      
+      // Get translations for the selected language
+      const t = translations[lang].notFound;
+      
+      // Update meta description
+      const metaDescription = document.querySelector('meta[name="description"]');
+      
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+        // Update aria-pressed attribute
+        btn.setAttribute('aria-pressed', btn.dataset.lang === lang);
+      });
+      
+      // Update page content
+      document.title = `${t.title} | LIVESTREAM CALCULATOR`;
+      metaDescription.setAttribute('content', t.description);
+      document.getElementById('error-title').textContent = "404";
+      document.getElementById('error-message').textContent = t.message;
+      document.getElementById('redirect-message').textContent = t.redirect;
+      document.getElementById('home-button').textContent = t.button;
+      
+      // Update home button href
+      const homeButton = document.getElementById('home-button');
+      homeButton.href = lang === 'fr' ? '/?lang=fr' : '/';
+      
+      // Update language switching label
+      document.getElementById('lang-label').textContent = t.changeLanguage;
+      
+      // Update URL with lang parameter
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', url);
+    }
+    
+    // Redirection with language persistence
+    window.onload = function() {
+      const lang = getPreferredLanguage();
+      setLanguage(lang);
+      
+      // Announce to screen readers that redirection will happen
+      setTimeout(function() {
+        window.location.href = currentLang === 'fr' ? '/?lang=fr' : '/';
+      }, 5000);
+    }
+  </script>
+</head>
+<body>
+  <div class="lang-switcher" role="group" aria-labelledby="lang-label">
+    <span id="lang-label" class="sr-only">Change language</span>
+    <button 
+      class="lang-btn" 
+      data-lang="en" 
+      onclick="setLanguage('en')" 
+      aria-pressed="false">
+      EN
+    </button>
+    <button 
+      class="lang-btn" 
+      data-lang="fr" 
+      onclick="setLanguage('fr')" 
+      aria-pressed="false">
+      FR
+    </button>
+  </div>
+  
+  <main class="container" role="main">
+    <h1 id="error-title" tabindex="-1">404</h1>
+    <p id="error-message">The page you are looking for doesn't exist or has been moved.</p>
+    <p id="redirect-message">You will be redirected to the home page in 5 seconds.</p>
+    <a href="/" id="home-button" class="button">Back to Home</a>
+  </main>
+</body>
+</html> 

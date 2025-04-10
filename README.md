@@ -35,6 +35,7 @@ The calculator now includes several new features to help traders optimize their 
 - **Smart Contract Conversion**: When adding a micro contract would result in 10 micros, the calculator automatically suggests converting to an additional mini contract.
 - **Risk Warning Indicators**: Visual warning icons appear when a position size exceeds the maximum allowed loss based on your platform's rules.
 - **Improved Architecture**: The codebase has been refactored for better maintainability, with clear separation between calculation logic and UI components.
+- **SEO Optimizations**: Comprehensive SEO implementation for better discoverability and multi-language support.
 
 ## ✨ Features
 
@@ -49,6 +50,7 @@ The calculator now includes several new features to help traders optimize their 
 - 🌍 Multilingual support (English and French)
 - 💾 Persistent settings via local storage
 - 📊 Usage analytics with Firebase
+- 🔍 SEO optimized with meta tags, structured data, and i18n support
 
 ## 🚀 Usage
 
@@ -99,6 +101,41 @@ This ensures traders can maximize their position size while staying within risk 
 The application automatically detects your browser's language settings and displays content in:
 - 🇬🇧 English (default)
 - 🇫🇷 French
+
+All UI elements, meta descriptions, and SEO-related content are fully localized for both languages.
+
+## 🔍 SEO Optimizations
+
+The application implements comprehensive SEO optimizations to improve discoverability:
+
+### 📝 Meta Tags & Open Graph
+- **Dynamic Meta Tags**: Title, description, and keywords are dynamically generated based on the user's language
+- **Open Graph Protocol**: Rich social media previews with custom OG images
+- **Twitter Cards**: Support for Twitter's large image summary cards
+- **Canonical URLs**: Proper canonical references to prevent duplicate content issues
+
+### 🌐 Internationalization (i18n)
+- **hreflang Tags**: Properly configured language alternates
+- **Dynamic Content**: All SEO-critical content is available in both English and French
+- **Language Detection**: Automatic language detection based on browser preferences
+
+### 📊 Structured Data
+- **JSON-LD**: Schema.org structured data for WebApplication type
+- **Rich Snippets**: Application details like features, screenshots, and ratings
+- **AuthorShip**: Proper attribution with author information and links
+
+### 📱 Progressive Web App (PWA)
+- **Web Manifest**: Complete manifest.json for installable PWA functionality
+- **Offline Support**: Foundational setup for offline capabilities
+- **Mobile Optimization**: Theme color, viewport settings, and Apple-specific meta tags
+
+### 🔄 Technical Optimizations
+- **Dynamic Sitemap**: Automatically generated sitemap.xml with proper lastmod dates
+- **Robots.txt**: Proper crawler instructions
+- **404 Page**: SEO-friendly 404 page with language support
+- **Core Web Vitals**: Performance optimizations (preload, preconnect)
+
+These optimizations ensure the application is easily discoverable by search engines, shareable on social media, and provides a great user experience across devices and languages.
 
 ## 🔧 Technical Details
 

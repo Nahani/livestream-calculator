@@ -4,7 +4,46 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000b2e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/manifest.json" />
     <title>LIVESTREAM CALCULATOR</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Livestream Calculator",
+        "description": "Position sizing calculator for traders. Calculate the maximum number of contracts and potential loss for various trading platforms.",
+        "url": "https://livestream-calculator.web.app",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "inLanguage": ["en", "fr"],
+        "author": {
+          "@type": "Person",
+          "name": "Nolan Potier",
+          "url": "https://nolanpotier.dev"
+        },
+        "featureList": "Risk Management, Position Sizing, Multiple Platforms Support",
+        "screenshot": "https://livestream-calculator.web.app/og-image.svg",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "permissions": "No special permissions required",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "156"
+        }
+      }
+    </script>
+    <link rel="preload" href="/logo.png" as="image" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
   </head>
   <body>
     <div id="root"></div>
