@@ -70,6 +70,11 @@ export const translations = {
     },
     challengeNote: {
       text: "For Topstep/Apex challenges, enter your accepted loss per trade multiplied by 10 (e.g., if you want to risk $1,000, enter $10,000)"
+    },
+    buttons: {
+      installApp: "Install the app",
+      switchToLight: "Switch to light mode",
+      switchToDark: "Switch to dark mode"
     }
   },
   fr: {
@@ -103,6 +108,11 @@ export const translations = {
     },
     challengeNote: {
       text: "En challenge Topstep/Apex, indiquez votre perte acceptée par trade x10 (ex : si vous souhaitez risquer 1 000, indiquez 10 000)"
+    },
+    buttons: {
+      installApp: "Installer l'application",
+      switchToLight: "Passer en mode clair",
+      switchToDark: "Passer en mode sombre"
     }
   }
 };

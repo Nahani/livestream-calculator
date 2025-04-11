@@ -1,9 +1,14 @@
 import React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { PWAInstallButton } from './PWAInstallButton';
+import { Tooltip } from './Tooltip';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../utils/i18n';
 
 export const Header: React.FC = () => {
   const { darkMode, toggleDarkMode } = useTheme();
+  const { language } = useLanguage();
 
   return (
     <div className="flex items-center justify-between mb-6">
@@ -26,17 +31,19 @@ export const Header: React.FC = () => {
         </h1>
       </div>
       <div className="flex items-center gap-2">
-        {/* <LanguageSwitcher /> */}
-        <button
-          onClick={toggleDarkMode}
-          className={`p-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${
-            darkMode 
-              ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' 
-              : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
-          }`}
-        >
-          {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-        </button>
+        <PWAInstallButton />
+        <Tooltip text={darkMode ? translations[language].buttons.switchToLight : translations[language].buttons.switchToDark}>
+          <button
+            onClick={toggleDarkMode}
+            className={`p-2 rounded-lg transition-all cursor-pointer duration-300 transform hover:scale-105 ${
+              darkMode 
+                ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' 
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
+            }`}
+          >
+            {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+        </Tooltip>
       </div>
     </div>
   );
