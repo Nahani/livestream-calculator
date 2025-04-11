@@ -22,8 +22,8 @@ interface SEOProps {
 
 export const SEO: React.FC<SEOProps> = ({
   title = {
-    en: 'LIVESTREAM CALCULATOR',
-    fr: 'LIVESTREAM CALCULATOR'
+    en: 'Livestream Calculator',
+    fr: 'Livestream Calculator'
   },
   description = {
     en: 'Position sizing calculator for traders. Calculate the maximum number of contracts and potential loss for various trading platforms.',

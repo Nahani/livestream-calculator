@@ -82,4 +82,29 @@ export const trackYoutubeClick = () => {
   trackEvent('youtube_channel_click', {
     channel: 'Romain Bailleul'
   });
+};
+
+// Events related to PWA installation
+export const trackPwaInstallPromptShown = () => {
+  trackEvent('pwa_install_prompt_shown');
+};
+
+export const trackPwaInstallButtonClicked = () => {
+  trackEvent('pwa_install_button_clicked');
+};
+
+export const trackPwaInstallPromptResponse = (outcome: 'accepted' | 'dismissed') => {
+  trackEvent('pwa_install_prompt_response', {
+    outcome: outcome
+  });
+};
+
+export const trackPwaInstalled = (method: 'browser_prompt' | 'app_store' | 'other' = 'browser_prompt') => {
+  trackEvent('pwa_installed', {
+    method: method
+  });
+};
+
+export const trackPwaAlreadyInstalled = () => {
+  trackEvent('pwa_already_installed');
 }; 

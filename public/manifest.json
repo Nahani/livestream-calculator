@@ -1,6 +1,7 @@
 {
   "name": "Livestream Calculator",
   "short_name": "LST Calculator",
+  "title": "",
   "description": "Position sizing calculator for traders",
   "start_url": "/",
   "display": "standalone",
@@ -28,6 +29,11 @@
     {
       "src": "og-image.jpg",
       "sizes": "1200x630",
+      "type": "image/jpg"
+    },
+    {
+      "src": "og-image-mobile.jpg",
+      "sizes": "1080x1920",
       "type": "image/jpg"
     }
   ]
