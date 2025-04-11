@@ -5,6 +5,17 @@ import { BeforeInstallPromptEvent } from '../types/pwa';
 import { Tooltip } from './Tooltip';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/i18n';
+import { 
+  trackPwaInstallPromptShown, 
+  trackPwaInstallButtonClicked, 
+  trackPwaInstallPromptResponse, 
+  trackPwaInstalled,
+  trackPwaAlreadyInstalled
+} from '../utils/analytics';
+
+interface NavigatorWithStandalone extends Navigator {
+  standalone?: boolean;
+}
 
 export const PWAInstallButton: React.FC = () => {
   const { darkMode } = useTheme();
@@ -14,23 +25,44 @@ export const PWAInstallButton: React.FC = () => {
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault();
       setInstallPrompt(e as BeforeInstallPromptEvent);
+      // Track when the installation prompt is available
+      trackPwaInstallPromptShown();
+    };
+
+    const handleAppInstalled = () => {
+      setIsInstalled(true);
+      // Track when the app is installed
+      trackPwaInstalled('browser_prompt');
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', () => setIsInstalled(true));
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    // Check if the app is already installed
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                         (window.navigator as NavigatorWithStandalone).standalone === true;
+    
+    if (isStandalone) {
+      setIsInstalled(true);
+      trackPwaAlreadyInstalled();
+    }
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', () => setIsInstalled(true));
+      window.removeEventListener('appinstalled', handleAppInstalled);
     };
   }, []);
 
   const handleInstallClick = async () => {
     if (installPrompt) {
+      trackPwaInstallButtonClicked();
+      
       await installPrompt.prompt();
       const { outcome } = await installPrompt.userChoice;
+      
+      trackPwaInstallPromptResponse(outcome);
+      
       if (outcome === 'accepted') {
         setIsInstalled(true);
       }

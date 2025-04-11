@@ -8,7 +8,7 @@ A modern, responsive calculator for trading position sizing based on drawdown, s
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-06B6D4.svg)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-6.2-646CFF.svg)](https://vitejs.dev/)
 
-![Livestream Calculator Screenshot](/images/screenshot_dark.png)
+![Livestream Calculator Screenshot](/images/screenshot_dark.jpg)
 
 ## 📱 Overview
 
@@ -17,8 +17,8 @@ The Livestream Calculator helps traders determine the optimal position size for 
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/screenshot_dark.png" alt="Dark Mode" width="400"/></td>
-      <td align="center"><img src="images/screenshot_light.png" alt="Light Mode" width="400"/></td>
+      <td align="center"><img src="images/screenshot_dark.jpg" alt="Dark Mode" width="400"/></td>
+      <td align="center"><img src="images/screenshot_light.jpg" alt="Light Mode" width="400"/></td>
     </tr>
     <tr>
       <td align="center"><b>Dark Mode</b></td>
