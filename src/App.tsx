@@ -50,6 +50,7 @@ function App() {
                 maxLoss={maxLoss}
                 stopLossPoints={stopLossPoints}
                 darkMode={darkMode}
+                platform={platform}
               />
             </div>
           ) : (

@@ -4,10 +4,11 @@ import { trackCfdCalculation } from '../utils/analytics';
 
 export const useCfdCalculation = (
   maxLoss: number,
-  stopLossPoints: number
+  stopLossPoints: number,
+  pointMultiplier?: number
 ) => {
   // Calculate maximum lots for CFD platforms
-  const maxLots = calculateCfdLots(maxLoss, stopLossPoints);
+  const maxLots = calculateCfdLots(maxLoss, stopLossPoints, pointMultiplier);
   
   // Calculate the total potential loss
   const totalLoss = stopLossPoints ? maxLots * stopLossPoints : 0;

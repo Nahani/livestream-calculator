@@ -1,79 +1,68 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/i18n';
-import { useCfdCalculation } from '../hooks/useCfdCalculation';
-import { CfdOption } from './cfd/CfdOption';
+import { Platform } from '../types';
+import { PlatformCfdCard } from './cfd/PlatformCfdCard';
 
 interface CfdCardProps {
   maxLoss: number;
   stopLossPoints: number;
   darkMode: boolean;
+  platform: Platform;
 }
 
 export const CfdCard: React.FC<CfdCardProps> = ({
   maxLoss,
   stopLossPoints,
-  darkMode
+  darkMode,
+  platform
 }) => {
   const { language } = useLanguage();
   const t = translations[language];
 
-  // Use custom hook for calculations
-  const {
-    maxLots,
-    totalLoss,
-    potentialLossWithOneMore,
-    canAddOneMore
-  } = useCfdCalculation(maxLoss, stopLossPoints);
-
-  return (
-    <div 
-      className={`rounded-2xl p-6 ${
-        darkMode 
-          ? 'bg-gray-700/50 hover:bg-gray-700/70' 
-          : 'bg-gray-100 hover:bg-gray-50'
-      }`}
-      style={{ 
-        transition: 'background-color 0.3s ease',
-        outline: 'none',
-        WebkitTapHighlightColor: 'transparent'
-      }}
-    >
-      <h3 className={`text-xl font-semibold mb-6 ${
-        darkMode ? 'text-gray-200' : 'text-gray-800'
-      }`}
-        style={{ transition: 'color 0.3s ease' }}
-      >
-        {t.cfd.title}
-      </h3>
-      
-      <div className="space-y-4">
-        {/* Current optimal option */}
-        <CfdOption
-          loss={totalLoss}
-          maxLoss={maxLoss}
-          lots={maxLots}
-          darkMode={darkMode}
-          t={t}
-        />
-        
-        {/* Option with one more lot */}
-        {canAddOneMore && (
-          <CfdOption
-            loss={potentialLossWithOneMore}
+  // For FTMO/WGF platform, show separate cards for each
+  if (platform.name === 'FTMO/WGF') {
+    return (
+      <>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <PlatformCfdCard
             maxLoss={maxLoss}
-            lots={maxLots + 1}
+            stopLossPoints={stopLossPoints}
             darkMode={darkMode}
-            t={t}
+            platform="FTMO"
+            showLogo={true}
           />
-        )}
-      </div>
+          <PlatformCfdCard
+            maxLoss={maxLoss}
+            stopLossPoints={stopLossPoints}
+            darkMode={darkMode}
+            platform="WGF"
+            showLogo={true}
+          />
+        </div>
+        <p className={`mt-2 text-sm text-center italic ${
+            darkMode ? 'text-gray-400' : 'text-gray-600'
+          }`}>
+            {t.cfd.spreadNote}
+        </p>
+      </>
+    );
+  }
 
+  // For other platforms, use PlatformCfdCard without logo
+  return (
+    <>
+      <PlatformCfdCard
+        maxLoss={maxLoss}
+        stopLossPoints={stopLossPoints}
+        darkMode={darkMode}
+        platform={platform}
+      />
       <p className={`mt-2 text-sm text-center italic ${
           darkMode ? 'text-gray-400' : 'text-gray-600'
         }`}>
           {t.cfd.spreadNote}
-        </p>
-    </div>
+      </p>
+    </>
   );
 }; 

@@ -23,11 +23,12 @@ export const calculateMaxLoss = (drawdownValue: number, platform: Platform): num
  * Calculates the number of lots for CFD platforms
  * @param maxLoss Maximum allowed loss amount
  * @param stopLossPoints Stop loss points
+ * @param pointMultiplier Multiplier for stopLossPoints (1 for FTMO/UFUNDED, 0.1 for WGF)
  * @returns Maximum number of lots
  */
-export const calculateCfdLots = (maxLoss: number, stopLossPoints: number): number => {
+export const calculateCfdLots = (maxLoss: number, stopLossPoints: number, pointMultiplier: number = 1): number => {
   if (!stopLossPoints) return 0;
-  return Math.floor(maxLoss / stopLossPoints);
+  return Math.floor(maxLoss / (stopLossPoints * pointMultiplier));
 };
 
 /**
