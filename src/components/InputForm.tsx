@@ -39,12 +39,20 @@ export const InputForm: React.FC<InputFormProps> = ({
   ];
 
   const divisorOptions = [
-    { value: '10', label: '10%' },
-    { value: '15', label: '6.66%' }
+    { value: '5', label: '20% (5 SL)' },
+    { value: '10', label: '10% (10 SL)' },
+    { value: '15', label: '6.66% (15 SL)' }
   ];
 
   const handlePlatformChange = (value: string) => {
-    const newDivisor = value === 'UFUNDED' ? 15 : 10;
+    let newDivisor: 5 | 10 | 15;
+    if (value === 'UFUNDED') {
+      newDivisor = 15;
+    } else if (value === 'TopStep/APEX') {
+      newDivisor = 10;
+    } else {
+      newDivisor = 10;
+    }
     setPlatform({
       name: value as Platform['name'],
       drawdownDivisor: newDivisor
@@ -54,7 +62,7 @@ export const InputForm: React.FC<InputFormProps> = ({
   const handleDivisorChange = (value: string) => {
     setPlatform({
       name: platform.name,
-      drawdownDivisor: parseInt(value) as 10 | 15
+      drawdownDivisor: parseInt(value) as 5 | 10 | 15
     });
   };
 

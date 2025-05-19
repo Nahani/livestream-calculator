@@ -16,7 +16,7 @@ export interface ThemeContextType {
 
 export type Platform = {
   name: 'TopStep/APEX' | 'FTMO/WGF' | 'UFUNDED';
-  drawdownDivisor: 10 | 15;
+  drawdownDivisor: 5 | 10 | 15;
 }
 
 export interface InputProps {
