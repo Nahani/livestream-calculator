@@ -75,6 +75,11 @@ export const translations = {
       installApp: "Install the app",
       switchToLight: "Switch to light mode",
       switchToDark: "Switch to dark mode"
+    },
+    sections: {
+      indices: "Indices",
+      commodities: "Commodities",
+      currencies: "Currencies"
     }
   },
   fr: {
@@ -113,6 +118,11 @@ export const translations = {
       installApp: "Installer l'application",
       switchToLight: "Passer en mode clair",
       switchToDark: "Passer en mode sombre"
+    },
+    sections: {
+      indices: "Indices",
+      commodities: "Matières Premières",
+      currencies: "Devises"
     }
   }
 };
