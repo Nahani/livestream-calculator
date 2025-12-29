@@ -1,21 +1,25 @@
-import React from 'react';
-import { Platform } from '../types';
-import { useTheme } from '../contexts/ThemeContext';
-import { useLanguage } from '../contexts/LanguageContext';
-import { translations } from '../utils/i18n';
+import React from "react";
+import { Platform, LossMode } from "../types";
+import { useTheme } from "../contexts/ThemeContext";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translations } from "../utils/i18n";
+
 interface MaxLossDisplayProps {
   maxLoss: number;
   platform: Platform;
+  lossMode: LossMode;
 }
 
-export const MaxLossDisplay: React.FC<MaxLossDisplayProps> = ({ maxLoss, platform }) => {
+export const MaxLossDisplay: React.FC<MaxLossDisplayProps> = ({ maxLoss, platform, lossMode }) => {
   const { darkMode } = useTheme();
   const { language } = useLanguage();
   const t = translations[language];
-  
+
   const title = t.maxLoss.title;
-    
-  const explanation = t.maxLoss.calculatedWith(platform);
+
+  const explanation = lossMode === "manual"
+    ? t.lossMode.manual
+    : t.maxLoss.calculatedWith(platform);
 
   return (
     <div className={`mt-3 mb-6 p-4 flex flex-col items-center justify-center rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${

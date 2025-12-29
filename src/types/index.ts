@@ -35,3 +35,13 @@ export interface SelectProps {
   options: { value: string; label: string }[];
   darkMode: boolean;
 }
+
+export interface AuthContextType {
+  user: { email: string } | null;
+  loading: boolean;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
+}
+
+export type LossMode = "auto" | "manual";

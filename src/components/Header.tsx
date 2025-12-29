@@ -1,14 +1,17 @@
-import React from 'react';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
-import { PWAInstallButton } from './PWAInstallButton';
-import { Tooltip } from './Tooltip';
-import { useLanguage } from '../contexts/LanguageContext';
-import { translations } from '../utils/i18n';
+import React from "react";
+import { Moon, Sun, LogOut } from "lucide-react";
+import { useTheme } from "../contexts/ThemeContext";
+import { useAuth } from "../contexts/AuthContext";
+import { PWAInstallButton } from "./PWAInstallButton";
+import { Tooltip } from "./Tooltip";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translations } from "../utils/i18n";
 
 export const Header: React.FC = () => {
   const { darkMode, toggleDarkMode } = useTheme();
+  const { user, signOut } = useAuth();
   const { language } = useLanguage();
+  const t = translations[language];
 
   return (
     <div className="flex items-center justify-between mb-6">
@@ -32,18 +35,32 @@ export const Header: React.FC = () => {
       </div>
       <div className="flex items-center gap-2">
         <PWAInstallButton />
-        <Tooltip text={darkMode ? translations[language].buttons.switchToLight : translations[language].buttons.switchToDark}>
+        <Tooltip text={darkMode ? t.buttons.switchToLight : t.buttons.switchToDark}>
           <button
             onClick={toggleDarkMode}
             className={`p-2 rounded-lg transition-all cursor-pointer duration-300 transform hover:scale-105 ${
-              darkMode 
-                ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' 
-                : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
+              darkMode
+                ? "bg-gray-700 hover:bg-gray-600 text-yellow-400"
+                : "bg-gray-100 hover:bg-gray-200 text-gray-600"
             }`}
           >
             {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
         </Tooltip>
+        {user && (
+          <Tooltip text={t.auth.signOut}>
+            <button
+              onClick={signOut}
+              className={`p-2 rounded-lg transition-all cursor-pointer duration-300 transform hover:scale-105 ${
+                darkMode
+                  ? "bg-gray-700 hover:bg-red-600 text-gray-300 hover:text-white"
+                  : "bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600"
+              }`}
+            >
+              <LogOut className="w-5 h-5" />
+            </button>
+          </Tooltip>
+        )}
       </div>
     </div>
   );

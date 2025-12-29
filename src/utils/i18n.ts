@@ -80,6 +80,30 @@ export const translations = {
       indices: "Indices",
       commodities: "Commodities",
       currencies: "Currencies"
+    },
+    auth: {
+      loginToSeeResults: "Sign in to see results",
+      createAccount: "Create an account",
+      email: "Email",
+      emailPlaceholder: "your@email.com",
+      password: "Password",
+      passwordPlaceholder: "Your password",
+      signIn: "Sign In",
+      signUp: "Sign Up",
+      signOut: "Sign Out",
+      alreadyHaveAccount: "Already have an account? Sign in",
+      noAccount: "Don't have an account? Sign up",
+      invalidCredentials: "Invalid email or password",
+      emailInUse: "This email is already in use",
+      weakPassword: "Password must be at least 6 characters",
+      invalidEmail: "Invalid email address",
+      genericError: "An error occurred. Please try again."
+    },
+    lossMode: {
+      auto: "Auto",
+      manual: "Manual",
+      acceptedLoss: "Accepted Loss ($)",
+      acceptedLossPlaceholder: "Enter accepted loss"
     }
   },
   fr: {
@@ -123,6 +147,30 @@ export const translations = {
       indices: "Indices",
       commodities: "Matières Premières",
       currencies: "Devises"
+    },
+    auth: {
+      loginToSeeResults: "Connectez-vous pour voir les résultats",
+      createAccount: "Créez un compte",
+      email: "Email",
+      emailPlaceholder: "votre@email.com",
+      password: "Mot de passe",
+      passwordPlaceholder: "Votre mot de passe",
+      signIn: "Se connecter",
+      signUp: "S'inscrire",
+      signOut: "Se déconnecter",
+      alreadyHaveAccount: "Déjà un compte ? Se connecter",
+      noAccount: "Pas de compte ? S'inscrire",
+      invalidCredentials: "Email ou mot de passe invalide",
+      emailInUse: "Cet email est déjà utilisé",
+      weakPassword: "Le mot de passe doit contenir au moins 6 caractères",
+      invalidEmail: "Adresse email invalide",
+      genericError: "Une erreur est survenue. Veuillez réessayer."
+    },
+    lossMode: {
+      auto: "Auto",
+      manual: "Manuel",
+      acceptedLoss: "Perte Acceptée ($)",
+      acceptedLossPlaceholder: "Entrez la perte acceptée"
     }
   }
 };
