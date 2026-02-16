@@ -41,9 +41,8 @@ export const InputForm: React.FC<InputFormProps> = ({
   const t = translations[language];
 
   const platformOptions: PlatformOption[] = [
-    { value: 'TopStep/APEX', label: 'TopStep / APEX' },
-    { value: 'FTMO/WGF', label: 'FTMO / WGF' },
-    { value: 'UFUNDED', label: 'UFUNDED' }
+    { value: 'Futures', label: 'Futures' },
+    { value: 'CFD', label: 'CFD' }
   ];
 
   const divisorOptions = [
@@ -53,17 +52,9 @@ export const InputForm: React.FC<InputFormProps> = ({
   ];
 
   const handlePlatformChange = (value: string) => {
-    let newDivisor: 5 | 10 | 15;
-    if (value === 'UFUNDED') {
-      newDivisor = 15;
-    } else if (value === 'TopStep/APEX') {
-      newDivisor = 10;
-    } else {
-      newDivisor = 10;
-    }
     setPlatform({
       name: value as Platform['name'],
-      drawdownDivisor: newDivisor
+      drawdownDivisor: 10
     });
   };
 
@@ -128,14 +119,19 @@ export const InputForm: React.FC<InputFormProps> = ({
             darkMode={darkMode}
           />
         ) : (
-          <NumberInput
-            label={t.lossMode.acceptedLoss}
-            value={acceptedLoss}
-            onChange={setAcceptedLoss}
-            placeholder={t.lossMode.acceptedLossPlaceholder}
-            prefix="$"
-            darkMode={darkMode}
-          />
+          <div>
+            <NumberInput
+              label={t.lossMode.acceptedLoss}
+              value={acceptedLoss}
+              onChange={setAcceptedLoss}
+              placeholder={t.lossMode.acceptedLossPlaceholder}
+              prefix="$"
+              darkMode={darkMode}
+            />
+            <p className={`text-[0.6rem] mt-1 ${darkMode ? "text-gray-500" : "text-gray-400"}`}>
+              {t.acceptedLossHint}
+            </p>
+          </div>
         )}
         <NumberInput
           label={t.stopLoss.label}

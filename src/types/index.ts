@@ -15,7 +15,7 @@ export interface ThemeContextType {
 }
 
 export type Platform = {
-  name: 'TopStep/APEX' | 'FTMO/WGF' | 'UFUNDED';
+  name: 'Futures' | 'CFD';
   drawdownDivisor: 5 | 10 | 15;
 }
 
@@ -42,6 +42,7 @@ export interface AuthContextType {
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 export type LossMode = "auto" | "manual";

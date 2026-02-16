@@ -6,7 +6,7 @@ import { Platform } from '../types';
  * @returns Boolean indicating if platform is CFD type
  */
 export const isCfdPlatform = (platform: Platform): boolean => {
-  return platform.name === 'FTMO/WGF' || platform.name === 'UFUNDED';
+  return platform.name === 'CFD';
 };
 
 /**

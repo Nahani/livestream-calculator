@@ -28,13 +28,13 @@ export const useCalculator = () => {
       } catch {
         // Fallback to default if parsing fails
         return {
-          name: 'TopStep/APEX',
+          name: 'Futures',
           drawdownDivisor: 10
         };
       }
     }
     return {
-      name: 'TopStep/APEX',
+      name: 'Futures',
       drawdownDivisor: 10
     };
   });

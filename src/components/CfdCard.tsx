@@ -20,8 +20,8 @@ export const CfdCard: React.FC<CfdCardProps> = ({
   const { language } = useLanguage();
   const t = translations[language];
 
-  // For FTMO/WGF platform, show separate cards for each
-  if (platform.name === 'FTMO/WGF') {
+  // For CFD platform, show separate cards for FTMO and WGF
+  if (platform.name === 'CFD') {
     return (
       <>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

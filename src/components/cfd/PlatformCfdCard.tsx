@@ -43,7 +43,7 @@ export const PlatformCfdCard: React.FC<PlatformCfdCardProps> = ({
         WebkitTapHighlightColor: 'transparent'
       }}
     >
-      {showLogo && platformName !== 'FTMO/WGF' && (
+      {showLogo && platformName !== 'CFD' && (
         <div className="flex items-center justify-between mb-6">
           <img 
             src={

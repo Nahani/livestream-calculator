@@ -40,12 +40,16 @@ const getPercentageFromDivisor = (divisor: number): string => {
 // Translations for the application
 export const translations = {
   en: {
+    tagline: "Calculate your position size. Protect your capital. Trade clean.",
+    motto: "Risk first. Always.",
+    acceptedLossHint: "Maximum amount you accept to lose on this trade.",
+    disclaimer: "This tool doesn't replace a strategy. It protects your capital.",
     drawdown: {
       label: "Remaining Drawdown ($)",
       placeholder: "Enter remaining drawdown"
     },
     stopLoss: {
-      label: "Stop Loss (points)",
+      label: "Stop Loss (points / $ for Gold)",
       placeholder: "Enter your stop loss"
     },
     platform: {
@@ -97,7 +101,14 @@ export const translations = {
       emailInUse: "This email is already in use",
       weakPassword: "Password must be at least 6 characters",
       invalidEmail: "Invalid email address",
-      genericError: "An error occurred. Please try again."
+      genericError: "An error occurred. Please try again.",
+      forgotPassword: "Forgot password?",
+      resetPassword: "Reset Password",
+      resetPasswordInfo: "Enter your email and we'll send you a reset link.",
+      resetEmailSent: "Reset email sent! Check your inbox.",
+      checkSpam: "If you don't see the email, check your spam or junk folder.",
+      backToLogin: "Back to sign in",
+      userNotFound: "No account found with this email"
     },
     lossMode: {
       auto: "Auto",
@@ -107,12 +118,16 @@ export const translations = {
     }
   },
   fr: {
+    tagline: "Calcule ta taille de position. Protège ton capital. Trade proprement.",
+    motto: "Risk first. Always.",
+    acceptedLossHint: "Montant maximum que tu acceptes de perdre sur ce trade.",
+    disclaimer: "Cet outil ne remplace pas une stratégie. Il protège ton capital.",
     drawdown: {
       label: "Drawdown Restant ($)",
       placeholder: "Entrez le drawdown restant"
     },
     stopLoss: {
-      label: "Stop Loss (points)",
+      label: "Stop Loss (points / $ pour Gold)",
       placeholder: "Entrez votre stop loss"
     },
     platform: {
@@ -164,7 +179,14 @@ export const translations = {
       emailInUse: "Cet email est déjà utilisé",
       weakPassword: "Le mot de passe doit contenir au moins 6 caractères",
       invalidEmail: "Adresse email invalide",
-      genericError: "Une erreur est survenue. Veuillez réessayer."
+      genericError: "Une erreur est survenue. Veuillez réessayer.",
+      forgotPassword: "Mot de passe oublié ?",
+      resetPassword: "Réinitialiser",
+      resetPasswordInfo: "Entrez votre email et nous vous enverrons un lien de réinitialisation.",
+      resetEmailSent: "Email envoyé ! Vérifiez votre boîte de réception.",
+      checkSpam: "Si vous ne voyez pas l'email, vérifiez vos spams ou courriers indésirables.",
+      backToLogin: "Retour à la connexion",
+      userNotFound: "Aucun compte trouvé avec cet email"
     },
     lossMode: {
       auto: "Auto",
