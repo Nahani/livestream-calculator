@@ -60,3 +60,29 @@
 .animate-slide-in {
   animation: slideIn 0.3s ease-out;
 }
+
+/* Circular progress for stock calculator */
+@keyframes circleReveal {
+  from {
+    stroke-dashoffset: 339.292;
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-circle-reveal {
+  animation: circleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-count-up {
+  animation: countUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}

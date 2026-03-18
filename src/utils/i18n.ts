@@ -115,6 +115,24 @@ export const translations = {
       manual: "Manual",
       acceptedLoss: "Accepted Loss ($)",
       acceptedLossPlaceholder: "Enter accepted loss"
+    },
+    calculatorType: {
+      trading: "Futures / CFD",
+      stock: "Stocks"
+    },
+    stock: {
+      title: "Stock Position Calculation",
+      entryPrice: "Entry Price ($)",
+      entryPricePlaceholder: "e.g. 400",
+      stopLossPrice: "Stop Loss Price ($)",
+      stopLossPricePlaceholder: "e.g. 360",
+      acceptedLoss: "Accepted Loss ($)",
+      acceptedLossPlaceholder: "e.g. 500",
+      shares: "SHARES",
+      riskPerShare: "Risk per share",
+      positionValue: "Position value",
+      totalRisk: "Total risk",
+      result: "You can buy"
     }
   },
   fr: {
@@ -193,6 +211,24 @@ export const translations = {
       manual: "Manuel",
       acceptedLoss: "Perte Acceptée ($)",
       acceptedLossPlaceholder: "Entrez la perte acceptée"
+    },
+    calculatorType: {
+      trading: "Futures / CFD",
+      stock: "Actions"
+    },
+    stock: {
+      title: "Calcul de Position Actions",
+      entryPrice: "Prix d'entrée ($)",
+      entryPricePlaceholder: "ex: 400",
+      stopLossPrice: "Prix du Stop Loss ($)",
+      stopLossPricePlaceholder: "ex: 360",
+      acceptedLoss: "Perte Acceptée ($)",
+      acceptedLossPlaceholder: "ex: 500",
+      shares: "ACTIONS",
+      riskPerShare: "Risque par action",
+      positionValue: "Valeur de la position",
+      totalRisk: "Risque total",
+      result: "Vous pouvez acheter"
     }
   }
 };

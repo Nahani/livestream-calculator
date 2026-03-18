@@ -131,4 +131,24 @@ export const canAddContracts = (
   maxLossPercentage: number = 1.02
 ): boolean => {
   return currentLoss > 0 && potentialLoss <= maxLoss * maxLossPercentage;
+};
+
+/**
+ * Calculates stock position sizing
+ * @param entryPrice Entry price per share
+ * @param stopLossPrice Stop loss price per share
+ * @param acceptedLoss Maximum accepted loss
+ * @returns Number of shares and position value
+ */
+export const calculateStockShares = (
+  entryPrice: number,
+  stopLossPrice: number,
+  acceptedLoss: number
+): { shares: number; riskPerShare: number; positionValue: number; totalRisk: number } => {
+  const riskPerShare = entryPrice - stopLossPrice;
+  if (riskPerShare <= 0 || !acceptedLoss) return { shares: 0, riskPerShare: 0, positionValue: 0, totalRisk: 0 };
+  const shares = acceptedLoss / riskPerShare;
+  const positionValue = entryPrice * shares;
+  const totalRisk = shares * riskPerShare;
+  return { shares, riskPerShare, positionValue, totalRisk };
 }; 

@@ -31,6 +31,7 @@ The Livestream Calculator helps traders determine the optimal position size for 
 
 The calculator now includes several new features to help traders optimize their position sizing:
 
+- **Stock Position Calculator**: New dedicated tab for stock position sizing — enter entry price, stop loss price, and accepted loss to calculate the number of shares and position value.
 - **Alternative Position Sizing**: The calculator now shows additional position sizing options that remain within 2% of your maximum allowed loss, giving you more flexibility.
 - **Smart Contract Conversion**: When adding a micro contract would result in 10 micros, the calculator automatically suggests converting to an additional mini contract.
 - **Risk Warning Indicators**: Visual warning icons appear when a position size exceeds the maximum allowed loss based on your platform's rules.
@@ -40,6 +41,7 @@ The calculator now includes several new features to help traders optimize their 
 ## ✨ Features
 
 - 📈 Calculate maximum position sizes for different futures contracts
+- 📊 Stock position sizing calculator (shares count + position value)
 - 🏢 Support for multiple trading platforms (TopStep, FTMO, WGF, UFUNDED)
 - 🧮 Different calculation methods based on selected platform
 - 📱 Mini and Micro contract recommendations
@@ -163,10 +165,12 @@ The architecture has been refactored to improve maintainability and scalability:
 #### 🪝 Custom Hooks
 - `useContractCalculation`: Encapsulates all contract calculation logic
 - `useCfdCalculation`: Encapsulates all CFD calculation logic
+- `useStockCalculation`: Encapsulates stock position sizing logic
 
 #### 🧩 UI Components
 - `ContractOption`: Reusable component for displaying contract options
 - `CfdOption`: Reusable component for displaying CFD options
+- `StockInputForm` / `StockResult`: Dedicated components for stock calculator
 - `ContractCard`: Container component using the specialized hooks and UI components
 - `CfdCard`: Container component using the specialized hooks and UI components
 

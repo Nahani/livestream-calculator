@@ -46,3 +46,5 @@ export interface AuthContextType {
 }
 
 export type LossMode = "auto" | "manual";
+
+export type CalculatorType = "trading" | "stock";

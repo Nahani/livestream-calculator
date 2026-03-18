@@ -17,11 +17,19 @@ firebase deploy --only hosting
 
 ## Project Overview
 
-A React + TypeScript trading calculator app for position sizing based on drawdown, stop loss, and platform rules. Supports both futures contracts (TopStep/APEX) and CFD platforms (FTMO/WGF/UFUNDED).
+A React + TypeScript trading calculator app for position sizing based on drawdown, stop loss, and platform rules. Supports futures contracts (TopStep/APEX), CFD platforms (FTMO/WGF/UFUNDED), and stock position sizing.
 
 ## Architecture
 
-### Core Calculation Flow
+### Top-Level Structure
+
+The app has two calculator modes, selected via tabs in `App.tsx`:
+- **Trading** (Futures/CFD): uses `useCalculator` hook + `InputForm`
+- **Stock**: uses `useStockCalculation` hook + `StockInputForm`
+
+The `CalculatorType` (`"trading" | "stock"`) is persisted in localStorage.
+
+### Core Calculation Flow (Trading)
 
 1. **Input** → `useCalculator` hook manages drawdown, stop loss, and platform selection
 2. **Platform Detection** → `isCfdPlatform()` determines if CFD or futures contract
@@ -30,12 +38,19 @@ A React + TypeScript trading calculator app for position sizing based on drawdow
    - Futures: `useContractCalculation` → calculates mini + micro contracts
    - CFD: `useCfdCalculation` → calculates lots
 
+### Stock Calculation Flow
+
+1. **Input** → `useStockCalculation` hook manages entry price, stop loss price, accepted loss
+2. **Calculation** → `calculateStockShares()`: shares = acceptedLoss / (entryPrice - stopLossPrice)
+3. **Display** → `StockResult` shows shares count, position value, risk per share, total risk
+4. **Components**: `/src/components/stock/StockInputForm.tsx`, `/src/components/stock/StockResult.tsx`
+
 ### Key Architectural Patterns
 
 **Separation of Concerns:**
 - Calculation logic: `/src/utils/calculatorUtils.ts` (pure functions)
-- Business logic hooks: `/src/hooks/useContractCalculation.ts`, `/src/hooks/useCfdCalculation.ts`
-- UI components: `/src/components/contract/ContractOption.tsx`, `/src/components/cfd/CfdOption.tsx`
+- Business logic hooks: `/src/hooks/useContractCalculation.ts`, `/src/hooks/useCfdCalculation.ts`, `/src/hooks/useStockCalculation.ts`
+- UI components: `/src/components/contract/ContractOption.tsx`, `/src/components/cfd/CfdOption.tsx`, `/src/components/stock/StockResult.tsx`
 
 **State Management:**
 - React Context API for theme (`ThemeContext`) and language (`LanguageContext`)
