@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useCalculator } from "./hooks/useCalculator";
 import { useStockCalculation } from "./hooks/useStockCalculation";
 import { Layout } from "./components/Layout";
@@ -18,22 +18,13 @@ import { useLanguage } from "./contexts/LanguageContext";
 import { translations } from "./utils/i18n";
 import type { CalculatorType } from "./types";
 
-const CALC_TYPE_STORAGE_KEY = "calculator_type";
-
 function App() {
   const { darkMode } = useTheme();
   const { user, loading } = useAuth();
   const { language } = useLanguage();
   const t = translations[language];
 
-  const [calculatorType, setCalculatorType] = useState<CalculatorType>(() => {
-    const saved = localStorage.getItem(CALC_TYPE_STORAGE_KEY);
-    return saved === "stock" ? "stock" : "trading";
-  });
-
-  useEffect(() => {
-    localStorage.setItem(CALC_TYPE_STORAGE_KEY, calculatorType);
-  }, [calculatorType]);
+  const [calculatorType, setCalculatorType] = useState<CalculatorType>("trading");
 
   const {
     drawdown,

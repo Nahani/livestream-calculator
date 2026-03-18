@@ -26,6 +26,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     return savedTheme ? savedTheme === 'dark' : true;
   });
 
+  // Sync body background with theme to prevent white flash on overscroll
+  React.useEffect(() => {
+    document.documentElement.style.backgroundColor = darkMode ? "#111827" : "#eff6ff";
+    document.body.style.backgroundColor = darkMode ? "#111827" : "#eff6ff";
+  }, [darkMode]);
+
   // Function to toggle between modes
   const toggleDarkMode = () => {
     setDarkMode(prev => {

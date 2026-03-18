@@ -1,8 +1,8 @@
 import { SitemapStream, streamToPromise } from 'sitemap';
-import { Readable } from 'stream';
-import { writeFileSync } from 'fs';
-import { resolve } from 'path';
-import { execSync } from 'child_process';
+import { Readable } from 'node:stream';
+import { writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { execSync } from 'node:child_process';
 
 // Base URL for the site
 const URL_BASE = 'https://livestream-calculator.web.app';

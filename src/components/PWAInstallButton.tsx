@@ -21,36 +21,32 @@ export const PWAInstallButton: React.FC = () => {
   const { darkMode } = useTheme();
   const { language } = useLanguage();
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstalled, setIsInstalled] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(() => {
+    const isStandalone = window.matchMedia("(display-mode: standalone)").matches ||
+                         (window.navigator as NavigatorWithStandalone).standalone === true;
+    if (isStandalone) {
+      trackPwaAlreadyInstalled();
+    }
+    return isStandalone;
+  });
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
       setInstallPrompt(e as BeforeInstallPromptEvent);
-      // Track when the installation prompt is available
       trackPwaInstallPromptShown();
     };
 
     const handleAppInstalled = () => {
       setIsInstalled(true);
-      // Track when the app is installed
-      trackPwaInstalled('browser_prompt');
+      trackPwaInstalled("browser_prompt");
     };
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
-
-    // Check if the app is already installed
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-                         (window.navigator as NavigatorWithStandalone).standalone === true;
-    
-    if (isStandalone) {
-      setIsInstalled(true);
-      trackPwaAlreadyInstalled();
-    }
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', handleAppInstalled);
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", handleAppInstalled);
     };
   }, []);
 

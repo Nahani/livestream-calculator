@@ -1,30 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { calculateStockShares } from "../utils/calculatorUtils";
 
-const STOCK_STORAGE_PREFIX = "calculator_stock_";
-
 export const useStockCalculation = () => {
-  const [entryPrice, setEntryPrice] = useState<string>(() =>
-    localStorage.getItem(STOCK_STORAGE_PREFIX + "entryPrice") || ""
-  );
-  const [stopLossPrice, setStopLossPrice] = useState<string>(() =>
-    localStorage.getItem(STOCK_STORAGE_PREFIX + "stopLossPrice") || ""
-  );
-  const [acceptedLoss, setAcceptedLoss] = useState<string>(() =>
-    localStorage.getItem(STOCK_STORAGE_PREFIX + "acceptedLoss") || ""
-  );
-
-  useEffect(() => {
-    localStorage.setItem(STOCK_STORAGE_PREFIX + "entryPrice", entryPrice);
-  }, [entryPrice]);
-
-  useEffect(() => {
-    localStorage.setItem(STOCK_STORAGE_PREFIX + "stopLossPrice", stopLossPrice);
-  }, [stopLossPrice]);
-
-  useEffect(() => {
-    localStorage.setItem(STOCK_STORAGE_PREFIX + "acceptedLoss", acceptedLoss);
-  }, [acceptedLoss]);
+  const [entryPrice, setEntryPrice] = useState<string>("");
+  const [stopLossPrice, setStopLossPrice] = useState<string>("");
+  const [acceptedLoss, setAcceptedLoss] = useState<string>("");
 
   const entry = entryPrice ? parseFloat(entryPrice) : 0;
   const stop = stopLossPrice ? parseFloat(stopLossPrice) : 0;
