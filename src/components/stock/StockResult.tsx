@@ -26,6 +26,7 @@ interface StockRingCardProps {
   gradientFrom: string;
   gradientTo: string;
   darkMode: boolean;
+  language: "en" | "fr";
   t: typeof translations["en"];
 }
 
@@ -40,6 +41,7 @@ const StockRingCard: React.FC<StockRingCardProps> = ({
   gradientFrom,
   gradientTo,
   darkMode,
+  language,
   t
 }) => {
   const position = sharesCount * entryPrice;
@@ -111,7 +113,7 @@ const StockRingCard: React.FC<StockRingCardProps> = ({
           ? (darkMode ? "text-green-400/80" : "text-green-600")
           : (darkMode ? "text-blue-400/80" : "text-blue-600")
       }`}>
-        {riskPercent.toFixed(0)}% {t.stock.totalRisk.toLowerCase()}
+        {riskPercent.toFixed(0)}% {language === "fr" ? "du risque accepté" : "of accepted risk"}
       </span>
 
       {/* Stats */}
@@ -201,6 +203,7 @@ export const StockResult: React.FC<StockResultProps> = ({
           gradientFrom="#22c55e"
           gradientTo="#10b981"
           darkMode={darkMode}
+          language={language}
           t={t}
         />
 
@@ -217,6 +220,7 @@ export const StockResult: React.FC<StockResultProps> = ({
             gradientFrom="#3b82f6"
             gradientTo="#6366f1"
             darkMode={darkMode}
+            language={language}
             t={t}
           />
         )}

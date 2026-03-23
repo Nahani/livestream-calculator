@@ -38,10 +38,7 @@ export const NumberInput: React.FC<InputProps> = ({
               onChange(val);
             }
           }}
-          onWheel={(e) => {
-            e.currentTarget.blur();
-            e.preventDefault();
-          }}
+          onWheel={(e) => e.currentTarget.blur()}
           className={`block w-full rounded-xl ${
             prefix ? 'pl-8' : 'px-4'
           } py-3.5 text-sm transition-all duration-300 outline-none ${

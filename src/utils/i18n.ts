@@ -131,7 +131,7 @@ export const translations = {
       shares: "SHARES",
       riskPerShare: "Risk per share",
       positionValue: "Position value",
-      totalRisk: "Total risk",
+      totalRisk: "Accepted risk",
       result: "You can buy"
     }
   },
@@ -227,7 +227,7 @@ export const translations = {
       shares: "ACTIONS",
       riskPerShare: "Risque par action",
       positionValue: "Valeur de la position",
-      totalRisk: "Risque total",
+      totalRisk: "Risque accepté",
       result: "Vous pouvez acheter"
     }
   }
